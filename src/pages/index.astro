@@ -1,39 +1,49 @@
 ---
 import Base from '../layouts/Base.astro'
-import { SITE } from '../config'
+import Hero from '../components/Hero.astro'
+import Problem from '../components/Problem.astro'
+import Features from '../components/Features.astro'
+import HowItWorks from '../components/HowItWorks.astro'
+import Pricing from '../components/Pricing.astro'
+import Faq from '../components/Faq.astro'
+import FinalCta from '../components/FinalCta.astro'
+import { FAQ } from '../data/faq'
 
-const jsonLd = {
+const faqJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: SITE.name,
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: ['Windows', 'Linux'],
-  description: SITE.description,
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'IDR' },
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 }
 ---
 
-<Base title={`${SITE.name} — ${SITE.tagline}`} jsonLd={jsonLd}>
-  <!--
-    Placeholder hero (M0). Section lengkap landing dikerjakan di M1,
-    lalu visual/animasi Remotion dipasang di M4.
-  -->
-  <section class="container-site flex flex-col items-center py-24 text-center sm:py-32">
-    <p
-      class="mb-6 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted-foreground"
-    >
-      Website sedang dibangun
-    </p>
-    <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
-      {SITE.tagline}
-    </h1>
-    <p class="mt-6 max-w-xl text-lg text-muted-foreground">
-      Batch upload paralel, kompresi cerdas, dukungan video, dan resume anti-gagal — supaya Anda
-      fokus memotret, bukan menunggu upload.
-    </p>
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
-      <a class="btn-primary" href="/unduh">Download Gratis</a>
-      <a class="btn-secondary" href="/panduan">Lihat Cara Kerja</a>
-    </div>
-  </section>
+<Base
+  title="Foto Space — Upload ribuan foto event ke FotoYu, otomatis"
+  description="Aplikasi desktop untuk fotografer event: upload batch ribuan foto & video ke FotoYu secara paralel dengan kompresi cerdas, resume anti-gagal, dan laporan CSV/PDF."
+>
+  <Hero />
+  <Problem />
+  <Features />
+  <HowItWorks />
+  <Pricing />
+  <Faq />
+  <FinalCta />
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Foto Space',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Windows 10, Windows 11, Linux',
+      url: 'https://fotospace-website.pages.dev/',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'IDR' },
+    })}
+  />
 </Base>

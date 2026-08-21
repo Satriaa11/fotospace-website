@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-21T23:10:00+07:00",
+  "title": "Design System: Foto Space",
+  "extensions": {
+    "colorMeta": {
+      "darkroom-black": { "role": "neutral", "displayName": "Darkroom Black", "canonical": "oklch(13.5% 0.005 25)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "darkroom-pit": { "role": "neutral", "displayName": "Darkroom Pit", "canonical": "oklch(11% 0.005 25)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "darkroom-bench": { "role": "neutral", "displayName": "Darkroom Bench", "canonical": "oklch(19% 0.006 25)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "darkroom-panel": { "role": "neutral", "displayName": "Darkroom Panel", "canonical": "oklch(23% 0.007 25)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "safelight-coral": { "role": "primary", "displayName": "Safelight Coral", "canonical": "oklch(71% 0.18 25)", "tonalRamp": ["oklch(18% 0.06 25)", "oklch(28% 0.10 25)", "oklch(38% 0.13 25)", "oklch(48% 0.16 25)", "oklch(58% 0.18 25)", "oklch(68% 0.19 25)", "oklch(78% 0.15 25)", "oklch(90% 0.08 25)"] },
+      "safelight-bright": { "role": "primary", "displayName": "Safelight Bright", "canonical": "oklch(76% 0.16 25)", "tonalRamp": ["oklch(18% 0.06 25)", "oklch(28% 0.10 25)", "oklch(38% 0.13 25)", "oklch(48% 0.16 25)", "oklch(58% 0.18 25)", "oklch(68% 0.19 25)", "oklch(78% 0.15 25)", "oklch(90% 0.08 25)"] },
+      "safelight-deep": { "role": "primary", "displayName": "Safelight Deep", "canonical": "oklch(55% 0.20 27)", "tonalRamp": ["oklch(18% 0.06 25)", "oklch(28% 0.10 25)", "oklch(38% 0.13 25)", "oklch(48% 0.16 25)", "oklch(58% 0.18 25)", "oklch(68% 0.19 25)", "oklch(78% 0.15 25)", "oklch(90% 0.08 25)"] },
+      "paper-white": { "role": "neutral", "displayName": "Paper White", "canonical": "oklch(96.5% 0.006 60)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "ash-warm": { "role": "neutral", "displayName": "Ash Warm", "canonical": "oklch(60% 0.008 40)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "edge-faint": { "role": "neutral", "displayName": "Edge Faint", "canonical": "oklch(33% 0.008 35)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "edge-strong": { "role": "neutral", "displayName": "Edge Strong", "canonical": "oklch(43% 0.009 35)", "tonalRamp": ["oklch(8% 0.005 25)", "oklch(13% 0.005 25)", "oklch(18% 0.006 25)", "oklch(25% 0.007 25)", "oklch(38% 0.008 25)", "oklch(55% 0.008 25)", "oklch(75% 0.008 25)", "oklch(93% 0.006 25)"] },
+      "signal-green": { "role": "tertiary", "displayName": "Signal Green", "canonical": "oklch(72% 0.20 145)", "tonalRamp": ["oklch(18% 0.06 145)", "oklch(28% 0.10 145)", "oklch(38% 0.13 145)", "oklch(48% 0.16 145)", "oklch(58% 0.18 145)", "oklch(68% 0.19 145)", "oklch(78% 0.15 145)", "oklch(90% 0.08 145)"] },
+      "signal-blue": { "role": "tertiary", "displayName": "Signal Blue", "canonical": "oklch(58% 0.19 255)", "tonalRamp": ["oklch(18% 0.06 255)", "oklch(28% 0.10 255)", "oklch(38% 0.13 255)", "oklch(48% 0.16 255)", "oklch(58% 0.18 255)", "oklch(68% 0.19 255)", "oklch(78% 0.15 255)", "oklch(90% 0.08 255)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline only. One per page (The One Display Rule)." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings." },
+      "title": { "displayName": "Title", "purpose": "Card and list-item titles." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs, capped at 68ch." },
+      "label": { "displayName": "Label", "purpose": "Captions, metadata, table headers. Never uppercased." }
+    },
+    "shadows": [
+      { "name": "enlarger-ambient", "value": "0 32px 96px rgba(0, 0, 0, 0.55)", "purpose": "Hero app-window mock only. One per page, maximum." },
+      { "name": "focus-ring", "value": "0 0 0 2px #0e0c0c, 0 0 0 4px #ff6363", "purpose": "Keyboard focus on interactive elements. Crisp coral ring, never a glow." }
+    ],
+    "motion": [
+      { "name": "ease-out-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Default easing for all state transitions and reveals. No bounce, no elastic." },
+      { "name": "duration-fast", "value": "150ms", "purpose": "Hover and press state changes." },
+      { "name": "duration-normal", "value": "250ms", "purpose": "Larger state changes, accordion, nav." },
+      { "name": "duration-reveal", "value": "500ms", "purpose": "Scroll reveals (disabled under prefers-reduced-motion)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one coral action per viewport. Download, always.",
+      "html": "<button class=\"ds-btn-primary\">Unduh Gratis</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #ff6363; color: #ffffff; border: none; border-radius: 6px; padding: 10px 20px; font: 500 14px/1.4 'Inter Variable', system-ui, sans-serif; letter-spacing: -0.01em; cursor: pointer; transition: background 150ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-btn-primary:hover { background: #ff7575; } .ds-btn-primary:active { background: #d72a2a; } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #0e0c0c, 0 0 0 4px #ff6363; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "The supporting action in any section. Border over transparent, fills on hover.",
+      "html": "<button class=\"ds-btn-secondary\">Lihat Cara Kerja</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: transparent; color: #f7f4f2; border: 1px solid #403a38; border-radius: 6px; padding: 10px 20px; font: 500 14px/1.4 'Inter Variable', system-ui, sans-serif; letter-spacing: -0.01em; cursor: pointer; transition: background 150ms cubic-bezier(0.25, 1, 0.5, 1), border-color 150ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-btn-secondary:hover { background: #262120; border-color: #57504d; } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 2px #0e0c0c, 0 0 0 4px #ff6363; }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Static marker: version tag, platform, license tier. Never interactive.",
+      "html": "<span class=\"ds-badge\">v1.1.7</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; gap: 6px; background: #262120; color: #8a8280; border-radius: 999px; padding: 4px 12px; font: 500 13px/1.4 'Inter Variable', system-ui, sans-serif; letter-spacing: 0.01em; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Bench surface on the Black floor. Flat at rest; border carries the edge, never a shadow.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Kompresi cerdas</h3><p class=\"ds-card-body\">Foto besar jadi ringan tanpa kehilangan kualitas jual.</p></div>",
+      "css": ".ds-card { background: #1d1a1a; border: 1px solid #403a38; border-radius: 10px; padding: 24px; transition: border-color 150ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-card:hover { border-color: #57504d; } .ds-card-title { color: #f7f4f2; font: 600 18px/1.3 'Inter Variable', system-ui, sans-serif; letter-spacing: -0.01em; margin: 0 0 8px; } .ds-card-body { color: #8a8280; font: 400 15px/1.65 'Inter Variable', system-ui, sans-serif; margin: 0; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Top-bar link: ash at rest, panel fill on hover, paper white when current.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Panduan</a><a class=\"ds-nav-link ds-nav-link-current\" href=\"#\">Changelog</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 4px; } .ds-nav-link { color: #8a8280; text-decoration: none; border-radius: 6px; padding: 6px 10px; font: 500 14px/1.4 'Inter Variable', system-ui, sans-serif; transition: background 150ms cubic-bezier(0.25, 1, 0.5, 1), color 150ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-nav-link:hover { background: #262120; color: #f7f4f2; } .ds-nav-link-current { color: #f7f4f2; } .ds-nav-link:focus-visible { outline: none; box-shadow: 0 0 0 2px #0e0c0c, 0 0 0 4px #ff6363; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Safelight Darkroom",
+    "overview": "A darkroom at work: a near-black room, quiet and deliberate, with one red safelight that lets you see without ruining the print. Coral is the safelight itself. It appears only where action or meaning lives, and its rarity is what makes it trustworthy. Motion behaves like a print developing: things appear, they never bounce. The bar we study is the restraint of Linear and Stripe: confident spacing, exact typography, evidence on screen.",
+    "keyCharacteristics": [
+      "Restrained color strategy: tinted warm neutrals + one accent (safelight coral) under 10% of any screen",
+      "Flat by default: depth comes from tonal layering (pit → black → bench), not shadows",
+      "Solid, precise components: small radii (4–6px), 1px edges, no decoration",
+      "Evidence-first content: real screenshots, real numbers, real version tags",
+      "Inter only, tight tracking at display sizes, generous line-height at body sizes"
+    ],
+    "rules": [
+      { "name": "The Safelight Rule", "body": "Coral occupies less than 10% of any screen. It marks the path: one CTA per viewport, the active nav item, the live progress number. If coral is everywhere, nothing is lit.", "section": "colors" },
+      { "name": "The Warm Neutral Rule", "body": "No #000, no #fff, no cool grays. Every neutral is tinted toward coral at hue 25°. Cool gray reads as generic dark SaaS; warm charcoal reads as a room with a red lamp in it.", "section": "colors" },
+      { "name": "The One Display Rule", "body": "Exactly one Display-size headline per page, in the hero. Everything after it steps down.", "section": "typography" },
+      { "name": "The 68ch Rule", "body": "Body copy never exceeds 68 characters per line.", "section": "typography" },
+      { "name": "The Flat Darkroom Rule", "body": "Cards, rows, and sections are flat at rest with a 1px Edge Faint border where separation is needed. A card that needs a shadow to be noticed has the wrong content.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep coral under 10% of any screen (The Safelight Rule): one primary CTA per viewport, coral for live numbers and active states only.",
+      "Do tint every neutral toward hue 25° (The Warm Neutral Rule). Audit test: if a gray looks cool next to #ff6363, it is wrong.",
+      "Do separate surfaces with tone steps and 1px borders, not shadows (The Flat Darkroom Rule).",
+      "Do use ease-out exponential curves (ease-out-quart or gentler) for every transition; 150–250ms for states.",
+      "Do ship evidence: real app screenshots, real version numbers, real spec numbers (4–8 worker paralel adaptif, kompresi ≤200 KB, resume anti-gagal).",
+      "Do honor prefers-reduced-motion: disable reveals, keep opacity-only fallbacks.",
+      "Do keep body copy ≤68ch (The 68ch Rule) and exactly one Display headline per page (The One Display Rule)."
+    ],
+    "donts": [
+      "Don't build the template SaaS generik: no purple-blue gradient hero, no row of three identical icon cards, no emoji, no fake-feeling testimonials.",
+      "Don't produce AI slop klasik: no gradient text (background-clip: text), no decorative glassmorphism, no glowing neon, no AI-powered badges.",
+      "Don't drift into startup hype / crypto style: no bombast claims, no neon-on-black, no fake urgency or countdown timers.",
+      "Don't make it terlalu ramai: no everything-animating-at-once, no scroll-jacking, no parallax layers.",
+      "Don't use colored side-stripe borders (border-left accents) on cards or callouts; use full borders or leading icons.",
+      "Don't use #000 or #fff anywhere; use Darkroom Black and Paper White.",
+      "Don't use em dashes in copy; use commas, colons, or periods.",
+      "Don't nest cards, and don't give cards shadows to compensate for weak content."
+    ]
+  }
+}

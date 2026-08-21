@@ -61,7 +61,7 @@ Astro 7 (static) · React islands · Tailwind v4 · Inter self-hosted · Motion 
 
 1. **Hero** — headline hasil ("Upload ribuan foto event ke FotoYu, otomatis"), subheadline, CTA "Download Gratis" + "Lihat Cara Kerja", visual: video demo/screenshot dalam frame laptop + gradient glow
 2. **Masalah** — pain point fotografer event (upload manual berjam-jam, file besar, gagal di tengah jalan)
-3. **Solusi / Fitur** — 6 kartu: batch upload paralel (8–16 worker), kompresi otomatis ≤200KB, upload video, resume anti-gagal, laporan CSV/PDF, multi-akun
+3. **Solusi / Fitur** — 6 kartu: batch upload paralel adaptif (4–8 worker), kompresi otomatis ≤200KB, upload video, resume anti-gagal, laporan CSV/PDF, multi-akun
 4. **Cara Kerja** — 3 langkah: pilih folder → pilih event → klik upload (dengan screenshot tiap langkah)
 5. **Harga** — 3 tier sesuai lisensi app: Trial / Basic / Pro (sinkron dengan tier lisensi)
 6. **FAQ** — 6–8 pertanyaan (aman? perlu internet? beda dengan upload manual? lisensi berapa perangkat?) + JSON-LD FAQPage
@@ -134,14 +134,21 @@ fotospace-website/
 - Live: `https://fotospace-website.pages.dev`
 - Build/check/lint bersih; render Remotion end-to-end OK (webm 122 KB)
 
-### M1 — Landing tanpa animasi (1 hari)
-- [ ] Semua section landing (hero pakai screenshot statis dulu)
-- [ ] Data features/faq/pricing di `src/data/`
-- [ ] Meta + JSON-LD SoftwareApplication + FAQPage
+### M1 — Landing tanpa animasi ✅ selesai 2026-08-22
+- [x] Semua section landing: Hero (mock jendela app markup, bukan screenshot), Masalah (bon upload manual), Fitur (ledger 6 baris bernomor), Cara Kerja (3 langkah), Harga (3 tier dari PRD), FAQ (details/summary tanpa JS), CTA
+- [x] Data features/faq/pricing di `src/data/` — klaim berbasis kode app (worker 4–8 adaptif, kompresi ≤200 KB, resume MD5)
+- [x] Meta + JSON-LD SoftwareApplication + FAQPage
+- [x] Desain sesuai PRODUCT.md + DESIGN.md ("Safelight Darkroom"); token global.css disinkron
+
+**Hasil M1:**
+- Landing 7 section + 3 halaman (`/unduh`, `/changelog`, `/panduan`) dibangun build-time fetch GitHub API, tanpa dead-link di nav
+- `astro check` 0/0/0, ESLint bersih, semua rute 200
+- Sisa: island deteksi OS di `/unduh` (bagian M2), panduan lengkap (M3)
 
 ### M2 — Halaman distribusi (½ hari)
-- [ ] `/unduh` + integrasi GitHub API latest release + island deteksi OS
-- [ ] `/changelog` dari release notes
+- [x] `/unduh` + integrasi GitHub API latest release (fallback ke halaman rilis GitHub)
+- [x] `/changelog` dari release notes (formatter markdown ringan)
+- [ ] Island deteksi OS di `/unduh`
 
 ### M3 — Konten pendukung (½–1 hari)
 - [ ] `/panduan` (ditulis bersama user — butuh input alur app)

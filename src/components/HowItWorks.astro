@@ -1,0 +1,45 @@
+---
+/** Cara kerja: 3 langkah bernomor dengan garis penghubung, bukan kartu. */
+const STEPS = [
+  {
+    num: '1',
+    title: 'Pilih folder',
+    desc: 'Arahkan ke folder hasil event. Bisa langsung dari SD card yang baru dicabut.',
+  },
+  {
+    num: '2',
+    title: 'Pilih event & akun',
+    desc: 'Pakai Event Profile supaya harga, lokasi, dan tag terisi otomatis. Bisa juga diisi manual.',
+  },
+  {
+    num: '3',
+    title: 'Klik Upload',
+    desc: 'Worker paralel bekerja sampai selesai. Kalau ada gangguan di tengah jalan, app melanjutkan sendiri.',
+  },
+]
+---
+
+<section id="cara-kerja" class="scroll-mt-24 border-y border-border/60 bg-sunken">
+  <div class="container-site py-20 lg:py-28">
+    <div class="max-w-2xl">
+      <p class="kicker">Cara kerja</p>
+      <h2 class="section-headline mt-4 text-balance">Tiga langkah, lalu tinggal.</h2>
+    </div>
+
+    <ol class="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+      {
+        STEPS.map((s) => (
+          <li class="relative border-t border-border pt-6">
+            <span
+              aria-hidden="true"
+              class="absolute -top-[3px] left-0 h-1.5 w-10 rounded-full bg-primary"
+            />
+            <p class="font-mono text-[13px] text-muted-foreground">Langkah {s.num}</p>
+            <h3 class="mt-2 text-[17px] font-semibold tracking-[-0.01em]">{s.title}</h3>
+            <p class="mt-1.5 text-[15px] leading-[1.65] text-muted-foreground">{s.desc}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

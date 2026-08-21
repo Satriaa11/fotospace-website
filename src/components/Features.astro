@@ -1,0 +1,55 @@
+---
+/**
+ * Fitur sebagai ledger baris bernomor, bukan grid kartu identik.
+ * Ikon lucide (aturan repo) dirender statis oleh renderer React Astro.
+ */
+import { FileArchive, FileText, ShieldCheck, Users, Video, Zap } from 'lucide-react'
+import { FEATURES } from '../data/features'
+
+const ICONS = {
+  zap: Zap,
+  'file-archive': FileArchive,
+  video: Video,
+  'shield-check': ShieldCheck,
+  'file-text': FileText,
+  users: Users,
+} as const
+---
+
+<section id="fitur" class="scroll-mt-24">
+  <div class="container-site py-20 lg:py-28">
+    <div class="max-w-2xl">
+      <p class="kicker">Fitur</p>
+      <h2 class="section-headline mt-4 text-balance">
+        Semua yang terjadi antara SD card dan FotoYu.
+      </h2>
+      <p class="body-copy mt-5">
+        Dari folder mentah sampai tayang di toko Anda: Foto Space mengerjakan bagian yang selama
+        ini dilakukan dengan tangan.
+      </p>
+    </div>
+
+    <div class="mt-12 divide-y divide-border border-y border-border">
+      {
+        FEATURES.map((f) => {
+          const Icon = ICONS[f.icon]
+          return (
+            <div class="grid gap-3 py-6 md:grid-cols-[72px_minmax(0,1fr)_auto] md:gap-8 md:py-7">
+              <p class="kicker">{f.num}</p>
+              <div>
+                <h3 class="flex items-center gap-2.5 text-[17px] font-semibold tracking-[-0.01em]">
+                  <Icon className="h-[18px] w-[18px] shrink-0 text-muted-foreground" aria-hidden="true" />
+                  {f.title}
+                </h3>
+                <p class="mt-1.5 max-w-[62ch] text-[15px] leading-[1.65] text-muted-foreground">
+                  {f.description}
+                </p>
+              </div>
+              <p class="badge self-start font-mono text-xs md:self-center">{f.spec}</p>
+            </div>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>

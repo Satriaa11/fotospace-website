@@ -1,33 +1,39 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/inter';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
 
 /*
- * Design tokens — sinkron dengan app desktop Foto Space
- * (automate-fotoyu/src/renderer/src/assets/main.css, dark theme).
+ * The Safelight Darkroom — token sinkron DESIGN.md.
+ * Semua neutral di-tint ke hue coral (25°); tidak ada #000/#fff.
  */
 @theme {
   --font-sans:
     'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
 
-  --color-background: #0d0d0d;
-  --color-sunken: #0a0a0a;
-  --color-surface: #1c1c1d;
-  --color-foreground: #ffffff;
+  --color-background: #0e0c0c;
+  --color-sunken: #0a0909;
+  --color-surface: #1d1a1a;
+  --color-panel: #262120;
+  --color-foreground: #f7f4f2;
 
   --color-primary: #ff6363;
   --color-primary-hover: #ff7575;
   --color-primary-pressed: #d72a2a;
 
-  --color-secondary: #282828;
-  --color-muted-foreground: #7b7b7b;
-
-  --color-border: #3f4040;
-  --color-border-strong: #545555;
+  --color-muted-foreground: #8a8280;
+  --color-border: #403a38;
+  --color-border-strong: #57504d;
 
   --color-success: #30d158;
   --color-info: #0a84ff;
 
+  --radius-sm: 4px;
   --radius: 6px;
+  --radius-lg: 10px;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @layer base {
@@ -43,22 +49,59 @@
   ::selection {
     background: color-mix(in srgb, var(--color-primary) 40%, transparent);
   }
+
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--color-background),
+      0 0 0 4px var(--color-primary);
+    border-radius: var(--radius-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
   .container-site {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
   }
 
   .nav-link {
-    @apply rounded-md px-2.5 py-1.5 transition-colors hover:bg-secondary hover:text-foreground;
+    @apply rounded-[6px] px-2.5 py-1.5 text-muted-foreground transition-colors duration-150 hover:bg-panel hover:text-foreground;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover active:bg-primary-pressed;
+    @apply inline-flex items-center justify-center gap-2 rounded-[6px] bg-primary px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-primary-hover active:bg-primary-pressed;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary;
+    @apply inline-flex items-center justify-center gap-2 rounded-[6px] border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors duration-150 hover:border-border-strong hover:bg-panel;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-panel px-3 py-1 text-[13px] font-medium text-muted-foreground;
+  }
+
+  .kicker {
+    @apply font-mono text-[13px] font-medium tracking-wide text-muted-foreground;
+  }
+
+  .section-headline {
+    @apply text-[clamp(1.75rem,3vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-foreground;
+  }
+
+  .body-copy {
+    @apply max-w-[68ch] text-base leading-[1.65] text-muted-foreground;
   }
 }

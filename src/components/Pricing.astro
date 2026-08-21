@@ -1,0 +1,59 @@
+---
+/**
+ * Harga dari PRD lisensi (docs/prd/11-release-plan.md). Copy jujur: tier saat ini
+ * berbeda di durasi & jumlah perangkat, bukan gating fitur, jadi tidak dikarang.
+ */
+import { Check } from 'lucide-react'
+import { PRICING_NOTE, STUDIO_NOTE, TIERS } from '../data/pricing'
+---
+
+<section id="harga" class="scroll-mt-24">
+  <div class="container-site py-20 lg:py-28">
+    <div class="max-w-2xl">
+      <p class="kicker">Harga</p>
+      <h2 class="section-headline mt-4 text-balance">Mulai gratis, lanjut kalau terbukti.</h2>
+      <p class="body-copy mt-5">
+        Trial 7 hari dengan semua fitur. Tidak ada kartu kredit, tidak ada kewajiban.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-4 lg:grid-cols-3">
+      {
+        TIERS.map((t) => (
+          <div
+            class={`flex flex-col rounded-[10px] border p-6 sm:p-7 ${
+              t.featured ? 'border-border-strong bg-surface' : 'border-border bg-background'
+            }`}
+          >
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-sm font-semibold">{t.name}</h3>
+              {t.featured && <span class="badge font-mono text-xs">Pilihan studio</span>}
+            </div>
+            <p class="mt-5 font-mono text-3xl tracking-tight">{t.price}</p>
+            <p class="mt-1 text-[13px] text-muted-foreground">{t.period}</p>
+            {t.alt && <p class="mt-1 font-mono text-xs text-muted-foreground">{t.alt}</p>}
+            <p class="mt-4 text-[15px] leading-[1.6] text-muted-foreground">{t.tagline}</p>
+            <ul class="mt-5 space-y-2.5 border-t border-border pt-5 text-sm">
+              {t.features.map((f) => (
+                <li class="flex items-start gap-2.5">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-auto pt-7">
+              <a class={`w-full ${t.featured ? 'btn-primary' : 'btn-secondary'}`} href={t.cta.href}>
+                {t.cta.label}
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mt-8 max-w-[68ch] text-sm leading-[1.65] text-muted-foreground">{PRICING_NOTE}</p>
+    <p class="mt-2 text-sm text-muted-foreground">
+      {STUDIO_NOTE} <a class="underline decoration-border-strong underline-offset-4 hover:text-foreground transition-colors duration-150" href="mailto:satria.fotospace@gmail.com">Hubungi kami</a>.
+    </p>
+  </div>
+</section>

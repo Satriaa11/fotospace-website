@@ -1,0 +1,100 @@
+---
+/**
+ * Signature component (DESIGN.md §5): mock markup faithful jendela upload Foto Space.
+ * Ini imagery produk di hero sampai screenshot nyata tersedia (M4: diganti loop Remotion).
+ * Angka konsisten internal: total 1.284 file; progress 873 = 871 sukses + 2 duplikat.
+ */
+const thumbs = [
+  'hsl(24 28% 34%)',
+  'hsl(20 22% 26%)',
+  'hsl(28 30% 40%)',
+  'hsl(16 18% 22%)',
+  'hsl(24 26% 30%)',
+  'hsl(30 24% 36%)',
+  'hsl(18 20% 25%)',
+  'hsl(26 28% 32%)',
+]
+---
+
+<div
+  role="img"
+  aria-label="Jendela aplikasi Foto Space sedang mengunggah 1.284 file ke FotoYu: 873 selesai, 871 sukses, 0 gagal."
+  class="overflow-hidden rounded-[10px] border border-border bg-surface shadow-[0_32px_96px_rgba(0,0,0,0.55)]"
+>
+  <!-- Title bar -->
+  <div class="flex items-center gap-3 border-b border-border bg-background px-4 py-2.5">
+    <div class="flex gap-1.5">
+      <span class="h-2.5 w-2.5 rounded-full bg-panel"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-panel"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-panel"></span>
+    </div>
+    <p class="flex-1 text-center font-mono text-xs text-muted-foreground">Foto Space</p>
+    <span class="font-mono text-[11px] text-muted-foreground">v1.1.7</span>
+  </div>
+
+  <div class="md:grid md:grid-cols-[168px_minmax(0,1fr)]">
+    <!-- Sidebar -->
+    <nav
+      class="hidden border-r border-border bg-background/40 p-3 md:block"
+      aria-hidden="true"
+    >
+      <ul class="space-y-0.5 text-[13px]">
+        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Dashboard</li>
+        <li
+          class="flex items-center gap-2 rounded-[6px] bg-panel px-2.5 py-1.5 font-medium text-foreground"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>Upload
+        </li>
+        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Riwayat</li>
+        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Akun</li>
+        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Pengaturan</li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <div class="space-y-4 p-4 sm:p-5">
+      <div class="flex items-center justify-between gap-3">
+        <p class="text-sm font-semibold">Upload</p>
+        <span class="badge font-mono text-xs">Akun: dina-wedding</span>
+      </div>
+
+      <div
+        class="flex items-center justify-between gap-3 rounded-[6px] border border-border bg-background px-3 py-2 font-mono text-xs text-muted-foreground"
+      >
+        <span class="truncate">/SD-CARD/WEDDING-DINA-2026</span>
+        <span class="shrink-0">1.284 foto · 3 video</span>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-baseline justify-between font-mono text-xs">
+          <span class="text-muted-foreground">Mengunggah… <span class="text-foreground">873</span>/1.284</span>
+          <span class="text-muted-foreground">worker: 8</span>
+        </div>
+        <div class="h-1.5 overflow-hidden rounded-full bg-panel">
+          <div class="h-full w-[68%] rounded-full bg-primary"></div>
+        </div>
+        <div class="flex gap-4 font-mono text-[11px] text-muted-foreground">
+          <span class="flex items-center gap-1.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-success"></span>sukses 871
+          </span>
+          <span>duplikat 2</span>
+          <span>gagal 0</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-1.5 sm:grid-cols-8">
+        {
+          thumbs.map((tone, i) => (
+            <div
+              class="aspect-[4/3] rounded-[4px]"
+              style={{
+                background: `linear-gradient(160deg, ${tone}, hsl(20 15% 14%))`,
+                boxShadow: i === 6 ? '0 0 0 1.5px var(--color-primary)' : undefined,
+              }}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>

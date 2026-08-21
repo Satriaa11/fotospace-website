@@ -1,0 +1,41 @@
+---
+import AppWindowMock from './AppWindowMock.astro'
+import { SITE } from '../config'
+---
+
+<section class="relative overflow-hidden">
+  <!-- Safelight: satu sumber cahaya coral, blur besar, di pojok -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-48 right-[-15%] h-[560px] w-[560px] rounded-full opacity-[0.14] blur-3xl"
+    style="background: radial-gradient(circle, #ff6363 0%, transparent 70%)"
+  ></div>
+
+  <div
+    class="container-site grid gap-12 pb-20 pt-16 sm:pt-20 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-16 lg:pb-28 lg:pt-24"
+  >
+    <div>
+      <p class="kicker">Untuk fotografer event</p>
+      <h1
+        class="mt-4 text-balance text-[clamp(2.75rem,5.5vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.03em]"
+      >
+        {SITE.tagline}
+      </h1>
+      <p class="body-copy mt-6">
+        Foto Space memilah, mengompresi, dan mengunggah seluruh folder ke FotoYu secara paralel.
+        Anda pilih folder sekali; sisanya jalan sendiri sampai selesai.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a class="btn-primary" href="/unduh">Unduh Gratis</a>
+        <a class="btn-secondary" href="#cara-kerja">Lihat Cara Kerja</a>
+      </div>
+      <ul class="mt-8 flex flex-wrap gap-2">
+        <li class="badge">4–8 worker adaptif</li>
+        <li class="badge">Kompresi ≤200 KB</li>
+        <li class="badge">Resume anti-gagal</li>
+      </ul>
+    </div>
+
+    <AppWindowMock />
+  </div>
+</section>

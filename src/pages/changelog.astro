@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro'
+import { RELEASES } from '../config'
+import { fetchReleases, formatDate, formatReleaseBody } from '../lib/releases'
+
+const releases = await fetchReleases(12)
+---
+
+<Base
+  title="Changelog Foto Space"
+  description="Catatan rilis Foto Space: fitur baru, perbaikan, dan versi terdahulu."
+>
+  <section class="container-site py-16 sm:py-20">
+    <p class="kicker">Changelog</p>
+    <h1 class="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
+      Catatan rilis
+    </h1>
+    <p class="body-copy mt-4">
+      Setiap versi Foto Space dicatat di sini, sama persis dengan catatan di repo rilis.
+    </p>
+
+    {
+      releases.length > 0 ? (
+        <ol class="mt-12 max-w-3xl space-y-10 border-l border-border pl-6 sm:pl-8">
+          {releases.map((r) => (
+            <li class="relative">
+              <span
+                aria-hidden="true"
+                class="absolute -left-[31px] top-2 h-2 w-2 rounded-full bg-border-strong sm:-left-[39px]"
+              />
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h2 class="font-mono text-lg font-medium tracking-tight">{r.tag_name}</h2>
+                <p class="font-mono text-xs text-muted-foreground">{formatDate(r.published_at)}</p>
+              </div>
+              {r.body && (
+                <p class="mt-3 whitespace-pre-wrap text-[15px] leading-[1.7] text-muted-foreground">
+                  {formatReleaseBody(r.body)}
+                </p>
+              )}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="mt-12 text-sm text-muted-foreground">
+          Catatan rilis sedang tidak bisa diambil. Lihat langsung di{' '}
+          <a
+            class="underline decoration-border-strong underline-offset-4 transition-colors duration-150 hover:text-foreground"
+            href={`https://github.com/${RELEASES.repo}/releases`}
+          >
+            GitHub
+          </a>.
+        </p>
+      )
+    }
+  </section>
+</Base>

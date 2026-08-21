@@ -1,0 +1,35 @@
+---
+/** FAQ: <details>/<summary> murni, zero JS. Plus icon berputar jadi X saat terbuka. */
+import { Plus } from 'lucide-react'
+import { FAQ } from '../data/faq'
+---
+
+<section id="faq" class="scroll-mt-24 border-t border-border/60 bg-sunken">
+  <div class="container-site py-20 lg:py-28">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,5fr)] lg:gap-16">
+      <div>
+        <p class="kicker">FAQ</p>
+        <h2 class="section-headline mt-4 text-balance">Yang sering ditanyakan.</h2>
+      </div>
+
+      <div class="divide-y divide-border border-y border-border">
+        {
+          FAQ.map((item) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-medium [&::-webkit-details-marker]:hidden">
+                {item.q}
+                <Plus
+                  className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 ease-[cubic-bezier(0.25,1,0.5,1)] group-open:rotate-45"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p class="mt-3 max-w-[68ch] text-[15px] leading-[1.65] text-muted-foreground">
+                {item.a}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

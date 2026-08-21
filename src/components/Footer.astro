@@ -1,0 +1,41 @@
+---
+import { SITE } from '../config'
+
+const year = new Date().getFullYear()
+---
+
+<footer class="border-t border-border/60 bg-sunken">
+  <div class="container-site grid gap-8 py-10 sm:grid-cols-3">
+    <div class="space-y-2">
+      <div class="flex items-center gap-2 font-semibold">
+        <img src="/favicon.svg" alt="" width="20" height="20" class="h-5 w-5" />
+        <span>{SITE.name}</span>
+      </div>
+      <p class="max-w-xs text-sm text-muted-foreground">{SITE.tagline}</p>
+    </div>
+    <nav aria-label="Produk" class="space-y-2 text-sm">
+      <p class="font-medium text-foreground">Produk</p>
+      <ul class="space-y-1.5 text-muted-foreground">
+        <li><a class="transition-colors hover:text-foreground" href="/unduh">Unduh</a></li>
+        <li><a class="transition-colors hover:text-foreground" href="/panduan">Panduan</a></li>
+        <li><a class="transition-colors hover:text-foreground" href="/changelog">Changelog</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Legal" class="space-y-2 text-sm">
+      <p class="font-medium text-foreground">Legal</p>
+      <ul class="space-y-1.5 text-muted-foreground">
+        <li>
+          <a class="transition-colors hover:text-foreground" href="/kebijakan-privasi"
+            >Kebijakan Privasi</a
+          >
+        </li>
+        <li><a class="transition-colors hover:text-foreground" href="/lisensi">Lisensi</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="border-t border-border/40 py-4">
+    <p class="container-site text-center text-xs text-muted-foreground">
+      &copy; {year} {SITE.name}. FotoYu adalah merek dagang milik pemiliknya masing-masing.
+    </p>
+  </div>
+</footer>

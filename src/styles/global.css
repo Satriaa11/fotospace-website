@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/*
+ * Design tokens — sinkron dengan app desktop Foto Space
+ * (automate-fotoyu/src/renderer/src/assets/main.css, dark theme).
+ */
+@theme {
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-background: #0d0d0d;
+  --color-sunken: #0a0a0a;
+  --color-surface: #1c1c1d;
+  --color-foreground: #ffffff;
+
+  --color-primary: #ff6363;
+  --color-primary-hover: #ff7575;
+  --color-primary-pressed: #d72a2a;
+
+  --color-secondary: #282828;
+  --color-muted-foreground: #7b7b7b;
+
+  --color-border: #3f4040;
+  --color-border-strong: #545555;
+
+  --color-success: #30d158;
+  --color-info: #0a84ff;
+
+  --radius: 6px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-primary) 40%, transparent);
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+
+  .nav-link {
+    @apply rounded-md px-2.5 py-1.5 transition-colors hover:bg-secondary hover:text-foreground;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover active:bg-primary-pressed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary;
+  }
+}

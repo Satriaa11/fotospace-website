@@ -1,0 +1,22 @@
+{
+  "name": "fotospace-videos",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Produksi video promosi Foto Space via Remotion — hasil render dipakai website sebagai <video> statis.",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.515",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "remotion": "^4.0.515"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro'
+import { SITE } from '../config'
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE.name,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: ['Windows', 'Linux'],
+  description: SITE.description,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'IDR' },
+}
+---
+
+<Base title={`${SITE.name} — ${SITE.tagline}`} jsonLd={jsonLd}>
+  <!--
+    Placeholder hero (M0). Section lengkap landing dikerjakan di M1,
+    lalu visual/animasi Remotion dipasang di M4.
+  -->
+  <section class="container-site flex flex-col items-center py-24 text-center sm:py-32">
+    <p
+      class="mb-6 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted-foreground"
+    >
+      Website sedang dibangun
+    </p>
+    <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
+      {SITE.tagline}
+    </h1>
+    <p class="mt-6 max-w-xl text-lg text-muted-foreground">
+      Batch upload paralel, kompresi cerdas, dukungan video, dan resume anti-gagal — supaya Anda
+      fokus memotret, bukan menunggu upload.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      <a class="btn-primary" href="/unduh">Download Gratis</a>
+      <a class="btn-secondary" href="/panduan">Lihat Cara Kerja</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO(M5): update setelah domain final
+Sitemap: https://fotospace-website.pages.dev/sitemap-index.xml

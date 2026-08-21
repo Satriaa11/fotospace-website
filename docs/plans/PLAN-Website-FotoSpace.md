@@ -43,7 +43,7 @@ Hasil inspeksi langsung ke HTML ketiga situs (2026-08-21):
 
 ## 2. Stack (detail di `AGENTS.md`)
 
-Astro 5 (static) · React islands · Tailwind v4 · Inter self-hosted · Motion · lucide-react · `@astrojs/sitemap` · npm · Cloudflare Pages · **Remotion** (produksi video, folder `videos/`).
+Astro 7 (static) · React islands · Tailwind v4 · Inter self-hosted · Motion · lucide-react · `@astrojs/sitemap` · npm · Cloudflare Pages · **Remotion** (produksi video, folder `videos/`).
 
 ## 3. Struktur Halaman
 
@@ -122,12 +122,17 @@ fotospace-website/
 
 ## 7. Milestones
 
-### M0 — Scaffold (½ hari)
-- [ ] `npm create astro@latest` (template minimal) + integrasi React, Tailwind v4, sitemap
-- [ ] `AGENTS.md` ✅ + dokumen ini ✅
-- [ ] `src/config.ts`, Base layout, Header/Footer, global.css tokens (Inter, warna)
-- [ ] Repo git init + push; sambungkan Cloudflare Pages (build `npm run build`, output `dist`)
-- [ ] Init package `videos/`: `npm create video@latest` (template blank/hello-world) → hapus contoh, siap untuk komposisi
+### M0 — Scaffold ✅ selesai 2026-08-21
+- [x] `npm create astro@latest` (Astro 7.2) + integrasi React 19, Tailwind v4, sitemap
+- [x] `AGENTS.md` ✅ + dokumen ini ✅
+- [x] `src/config.ts`, Base layout, Header/Footer, global.css tokens (Inter, warna)
+- [x] Repo git init + push publik; Cloudflare Pages deploy pertama
+- [x] Init package `videos/` (Remotion) + render test `hero-placeholder.webm`
+
+**Hasil M0:**
+- Repo: `github.com/Satriaa11/fotospace-website` (publik)
+- Live: `https://fotospace-website.pages.dev`
+- Build/check/lint bersih; render Remotion end-to-end OK (webm 122 KB)
 
 ### M1 — Landing tanpa animasi (1 hari)
 - [ ] Semua section landing (hero pakai screenshot statis dulu)

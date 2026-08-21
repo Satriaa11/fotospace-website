@@ -14,7 +14,7 @@ Website promosi **Foto Space** — aplikasi desktop (Electron) untuk fotografer 
 
 | Komponen | Pilihan |
 |---|---|
-| Framework | **Astro 5** — static-first (`output: 'static'`) |
+| Framework | **Astro 7** — static-first (`output: 'static'`) |
 | UI interaktif | **React 19** sebagai Astro islands (`@astrojs/react`) |
 | Styling | **Tailwind CSS v4** |
 | Font | Inter self-hosted via `@fontsource-variable/inter` — DILARANG Google Fonts/CDN font |

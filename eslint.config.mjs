@@ -4,7 +4,7 @@ import astro from 'eslint-plugin-astro'
 import tseslint from 'typescript-eslint'
 
 export default [
-  { ignores: ['dist/**', 'node_modules/**', '.astro/**', 'videos/**'] },
+  { ignores: ['dist/**', 'node_modules/**', '.astro/**', 'videos/**', '.agents/**'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...astro.configs['flat/recommended'],

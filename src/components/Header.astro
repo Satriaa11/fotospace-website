@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets'
 import { SITE } from '../config'
 import logo from '../assets/logo.png'
+import UserNav from './UserNav'
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
@@ -10,10 +11,10 @@ import logo from '../assets/logo.png'
       <Image src={logo} alt="Logo Foto Space" width={24} height={24} class="h-6 w-6 rounded-md" />
       <span>{SITE.name}</span>
     </a>
-    <nav class="flex items-center gap-0.5 text-sm text-muted-foreground sm:gap-1">
+    <nav class="flex items-center gap-1 text-sm text-muted-foreground sm:gap-2">
       <a class="nav-link hidden sm:inline-flex" href="/panduan">Panduan</a>
       <a class="nav-link hidden sm:inline-flex" href="/changelog">Changelog</a>
-      <a class="btn-primary ml-2" href="/unduh">Unduh</a>
+      <UserNav client:idle />
     </nav>
   </div>
 </header>

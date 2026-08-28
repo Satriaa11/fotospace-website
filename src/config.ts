@@ -9,6 +9,12 @@ export const SITE = {
   tagline: 'Upload ribuan foto event ke FotoYu, otomatis.',
 }
 
+/** API Backend (PocketBase & Worker). */
+export const API = {
+  pocketbase: 'https://license.pocketdb.fun',
+  worker: 'https://api-license.pocketdb.fun',
+}
+
 /** Repo distribusi publik (GitHub Releases, akses tanpa token). */
 export const RELEASES = {
   repo: 'Stromzzz/fotospace-releases',

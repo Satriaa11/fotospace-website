@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro'
+import DashboardView from '../components/dashboard/DashboardView'
+---
+
+<Base
+  title="Dashboard — Foto Space"
+  description="Pusat lisensi dan akun Foto Space: status lisensi, masa aktif, pembelian token, dan riwayat pembayaran."
+>
+  <DashboardView client:load />
+</Base>

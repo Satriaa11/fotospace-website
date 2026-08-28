@@ -10,6 +10,21 @@ Website promosi **Foto Space** — aplikasi desktop (Electron) untuk fotografer 
 - Sumber kebenaran produk: repo private `Satriaa11/fotoyu-auto` (jangan pernah me-render/mengutip source code app di sini)
 - Distribusi: release publik di `Stromzzz/fotospace-releases` (GitHub Releases, akses tanpa token)
 
+## CodeGraph (wajib sebelum grep/read)
+
+Repo ini ter-index oleh **CodeGraph** (direktori `.codegraph/` di root, daemon file-watcher aktif). Gunakan SEBELUM grep/read untuk memahami atau mencari kode — hemat token dan round-trip:
+
+- **Satu panggilan, hasil lengkap**: `codegraph explore "<pertanyaan atau nama simbol>"` (shell) atau tool MCP `codegraph_explore` mengembalikan source verbatim (line-numbered, fresh dari disk) + call path + blast radius. Hasilnya setara dengan `read` — jangan baca ulang file yang sudah muncul di output.
+- **Jangan re-verify hasil dengan grep**: hasil berasal dari AST parse penuh; grep ulang hanya membuang token. `grep`/`read` hanya untuk detail yang tidak di-cover codegraph (config, docs, dll).
+- **Sebelum refactor/rename**: cek blast radius via `codegraph impact <simbol>` atau `codegraph callers <simbol>`.
+
+### Sync index
+
+- Daemon auto-sync perubahan file dalam ~1 detik. Cek status: `codegraph status`.
+- Bila watcher mati atau index stale: `codegraph sync` (inkremental) atau `codegraph index` (rebuild penuh).
+- Jika output codegraph memuat banner "edited since last index sync" untuk suatu file, file itu belum ter-index ulang — baca langsung dengan `read` sebelum mengeditnya.
+- Jangan hapus `.codegraph/` — menghapusnya memaksa rebuild penuh.
+
 ## Tech Stack (fixed — jangan ganti tanpa diskusi)
 
 | Komponen | Pilihan |
@@ -94,7 +109,7 @@ npx remotion render <Composition> --codec vp8 --output ../public/demo/<nama>.web
 - Repo: public, nama `fotospace-website`
 - Deploy: **Cloudflare Pages**, build command `npm run build`, output `dist/`
 - Branch `main` auto-deploy; preview deploy per PR
-- Domain produksi: TBD (set canonical + OG base URL di `src/config.ts` saat domain final)
+- Domain produksi: `https://fotospace.online`
 
 ## Definition of Done (per task)
 

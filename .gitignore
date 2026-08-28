@@ -26,3 +26,6 @@ pnpm-debug.log*
 # remotion (videos/)
 videos/out/
 videos/.remotion/
+
+# codegraph local index
+.codegraph/

@@ -163,7 +163,7 @@ fotospace-website/
 - [ ] OG image per halaman; audit Lighthouse ≥95
 
 ### M5 — Rilis (½ hari)
-- [ ] Set domain final → canonical/OG base
+- [x] Set domain final → `https://fotospace.online` (canonical, sitemap, robots, JSON-LD)
 - [ ] Verifikasi: sitemap, robots, OG preview (opengraph.xyz), Lighthouse final
 - [ ] Umbar link ke user testing
 

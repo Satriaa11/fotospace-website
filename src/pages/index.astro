@@ -8,6 +8,7 @@ import Pricing from '../components/Pricing.astro'
 import Faq from '../components/Faq.astro'
 import FinalCta from '../components/FinalCta.astro'
 import { FAQ } from '../data/faq'
+import { SITE } from '../config'
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -42,7 +43,7 @@ const faqJsonLd = {
       name: 'Foto Space',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Windows 10, Windows 11, Linux',
-      url: 'https://fotospace-website.pages.dev/',
+      url: `${SITE.url}/`,
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'IDR' },
     })}
   />

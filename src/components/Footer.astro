@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets'
 import { SITE } from '../config'
+import logo from '../assets/logo.png'
 
 const year = new Date().getFullYear()
 ---
@@ -8,7 +10,7 @@ const year = new Date().getFullYear()
   <div class="container-site grid gap-8 py-10 sm:grid-cols-3">
     <div class="space-y-2">
       <div class="flex items-center gap-2 font-semibold">
-        <img src="/favicon.svg" alt="" width="20" height="20" class="h-5 w-5" />
+        <Image src={logo} alt="Logo Foto Space" width={20} height={20} class="h-5 w-5 rounded-md" />
         <span>{SITE.name}</span>
       </div>
       <p class="max-w-xs text-sm text-muted-foreground">{SITE.tagline}</p>

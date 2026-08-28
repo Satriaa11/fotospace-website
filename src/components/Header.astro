@@ -1,11 +1,13 @@
 ---
+import { Image } from 'astro:assets'
 import { SITE } from '../config'
+import logo from '../assets/logo.png'
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
   <div class="container-site flex h-14 items-center justify-between">
     <a href="/" class="flex items-center gap-2 font-semibold tracking-tight">
-      <img src="/favicon.svg" alt="" width="24" height="24" class="h-6 w-6" />
+      <Image src={logo} alt="Logo Foto Space" width={24} height={24} class="h-6 w-6 rounded-md" />
       <span>{SITE.name}</span>
     </a>
     <nav class="flex items-center gap-0.5 text-sm text-muted-foreground sm:gap-1">

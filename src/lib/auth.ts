@@ -70,9 +70,7 @@ interface OAuth2Provider {
   authUrl: string
 }
 
-const OAUTH_STORAGE_KEY = 'fotospace_oauth2_state'
-
-export async function initiateGoogleLogin(redirectUrl: string): Promise<void> {
+export async function initiateGoogleLogin(): Promise<void> {
   const res = await fetch(`${API.pocketbase}/api/collections/users/auth-methods`)
   if (!res.ok) {
     throw new Error('Gagal mengambil konfigurasi login Google.')
@@ -89,70 +87,104 @@ export async function initiateGoogleLogin(redirectUrl: string): Promise<void> {
     )
   }
 
-  sessionStorage.setItem(
-    OAUTH_STORAGE_KEY,
-    JSON.stringify({
-      provider: google.name,
-      state: google.state,
-      codeVerifier: google.codeVerifier,
-      redirectUrl,
-    })
-  )
+  // PB 0.39: authUrl sengaja mengosongkan redirect_uri — client wajib
+  // menambahkan callback PB. Hasil auth dikirim balik lewat realtime
+  // subscription "@oauth2" dengan clientId = state (lihat
+  // apis/record_auth_with_oauth2_redirect.go).
+  const redirectUri = `${API.pocketbase}/api/oauth2-redirect`
 
-  window.location.href = `${google.authUrl}${encodeURIComponent(redirectUrl)}`
+  await new Promise<AuthState>((resolve, reject) => {
+    const es = new EventSource(
+      `${API.pocketbase}/api/realtime?${new URLSearchParams({
+        clientId: google.state,
+        'subscriptions[@oauth2]': '@oauth2',
+      })}`
+    )
+
+    const timeout = setTimeout(() => {
+      es.close()
+      reject(new Error('Login Google melebihi batas waktu. Silakan coba lagi.'))
+    }, 120_000)
+
+    es.onmessage = async (evt) => {
+      let msg: { name?: string; data?: { code?: string } }
+      try {
+        msg = JSON.parse(evt.data)
+      } catch {
+        return
+      }
+      if (msg.name !== '@oauth2' || !msg.data?.code) return
+
+      clearTimeout(timeout)
+      es.close()
+
+      try {
+        const auth = await completeOAuth2(
+          google.name,
+          msg.data.code,
+          google.codeVerifier,
+          redirectUri
+        )
+        resolve(auth)
+      } catch (err) {
+        reject(err)
+      }
+    }
+
+    const popup = window.open(
+      `${google.authUrl}${encodeURIComponent(redirectUri)}`,
+      'fotospace-oauth2',
+      'width=520,height=640,popup=yes'
+    )
+
+    if (!popup) {
+      clearTimeout(timeout)
+      es.close()
+      reject(
+        new Error('Popup login diblokir browser. Izinkan popup untuk fotospace.online lalu coba lagi.')
+      )
+    }
+  })
+}
+
+async function completeOAuth2(
+  provider: string,
+  code: string,
+  codeVerifier: string,
+  redirectUrl: string
+): Promise<AuthState> {
+  const res = await fetch(`${API.pocketbase}/api/collections/users/auth-with-oauth2`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ provider, code, codeVerifier, redirectUrl }),
+  })
+
+  const data = await res.json()
+  if (!res.ok) {
+    throw new Error(data.message || 'Gagal menyelesaikan login Google.')
+  }
+
+  const authState: AuthState = {
+    token: data.token,
+    record: {
+      id: data.record.id,
+      email: data.record.email,
+      name: data.record.name || data.record.email.split('@')[0],
+    },
+  }
+
+  setStoredAuth(authState.token, authState.record)
+  return authState
 }
 
 export async function handleOAuth2Callback(): Promise<AuthState | null> {
+  // Alur PB 0.39 tidak lagi membawa code+state kembali ke halaman aplikasi —
+  // hasil dikirim via realtime @oauth2. Callback ini dipertahankan agar
+  // komponen lama tidak perlu diubah.
   if (typeof window === 'undefined') return null
-  const url = new URL(window.location.href)
-  const code = url.searchParams.get('code')
-  const state = url.searchParams.get('state')
-
-  if (!code || !state) return null
-
-  const storedRaw = sessionStorage.getItem(OAUTH_STORAGE_KEY)
-  if (!storedRaw) return null
-
-  try {
-    const stored = JSON.parse(storedRaw)
-    if (stored.state !== state) {
-      throw new Error('State OAuth2 tidak cocok.')
-    }
-
-    const res = await fetch(`${API.pocketbase}/api/collections/users/auth-with-oauth2`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        provider: stored.provider,
-        code,
-        codeVerifier: stored.codeVerifier,
-        redirectUrl: stored.redirectUrl,
-      }),
-    })
-
-    const data = await res.json()
-    sessionStorage.removeItem(OAUTH_STORAGE_KEY)
-
-    if (!res.ok) {
-      throw new Error(data.message || 'Gagal menyelesaikan login Google.')
-    }
-
-    const authState: AuthState = {
-      token: data.token,
-      record: {
-        id: data.record.id,
-        email: data.record.email,
-        name: data.record.name || data.record.email.split('@')[0],
-      },
-    }
-
-    setStoredAuth(authState.token, authState.record)
-    return authState
-  } catch (err) {
-    sessionStorage.removeItem(OAUTH_STORAGE_KEY)
-    throw err
-  }
+  return null
 }
+
 export function getStoredAuth(): AuthState | null {
   if (typeof window === 'undefined') return null
   try {

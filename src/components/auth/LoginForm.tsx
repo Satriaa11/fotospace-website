@@ -57,8 +57,8 @@ export default function LoginForm() {
     setGoogleLoading(true)
 
     try {
-      const redirectUrl = `${window.location.origin}/login`
-      await initiateGoogleLogin(redirectUrl)
+      await initiateGoogleLogin()
+      window.location.href = '/dashboard'
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Gagal membuka login Google.')
       setGoogleLoading(false)

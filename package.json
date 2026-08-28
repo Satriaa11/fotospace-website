@@ -12,6 +12,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint .",
+    "deploy": "astro build && wrangler pages deploy dist --project-name=fotospace-website",
     "astro": "astro"
   },
   "dependencies": {

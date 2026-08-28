@@ -1,13 +1,16 @@
 ---
-import Base from '../layouts/Base.astro'
-import RegisterForm from '../components/auth/RegisterForm'
 ---
-
-<Base
-  title="Daftar Akun — Foto Space"
-  description="Daftar akun Foto Space untuk mendapatkan trial gratis 7 hari dan mengelola lisensi aplikasi."
->
-  <section class="container-site flex min-h-[calc(100dvh-180px)] items-center justify-center py-12">
-    <RegisterForm client:load />
-  </section>
-</Base>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0;url=/register" />
+    <title>Mengalihkan ke Register...</title>
+    <script is:inline>
+      window.location.href = '/register'
+    </script>
+  </head>
+  <body>
+    <p>Mengalihkan ke <a href="/register">/register</a>...</p>
+  </body>
+</html>

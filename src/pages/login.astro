@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro'
+import LoginForm from '../components/auth/LoginForm'
+---
+
+<Base
+  title="Login — Foto Space"
+  description="Login ke akun Foto Space Anda untuk mengelola lisensi, melihat masa aktif, dan mengunduh laporan."
+>
+  <section class="container-site flex min-h-[calc(100dvh-180px)] items-center justify-center py-12">
+    <LoginForm client:load />
+  </section>
+</Base>

@@ -60,6 +60,99 @@ export interface PaymentOrderResponse {
 
 const STORAGE_KEY = 'fotospace_auth_state'
 
+
+interface OAuth2Provider {
+  name: string
+  displayName?: string
+  state: string
+  codeVerifier: string
+  codeChallenge: string
+  authUrl: string
+}
+
+const OAUTH_STORAGE_KEY = 'fotospace_oauth2_state'
+
+export async function initiateGoogleLogin(redirectUrl: string): Promise<void> {
+  const res = await fetch(`${API.pocketbase}/api/collections/users/auth-methods`)
+  if (!res.ok) {
+    throw new Error('Gagal mengambil konfigurasi login Google.')
+  }
+
+  const data = await res.json()
+  const providers: OAuth2Provider[] =
+    data.oauth2?.providers || data.authProviders || []
+  const google = providers.find((p) => p.name === 'google')
+
+  if (!google) {
+    throw new Error(
+      'Login Google belum diaktifkan di PocketBase Admin. Silakan aktifkan OAuth2 Google di https://license.pocketdb.fun/_/ atau login dengan Email.'
+    )
+  }
+
+  sessionStorage.setItem(
+    OAUTH_STORAGE_KEY,
+    JSON.stringify({
+      provider: google.name,
+      state: google.state,
+      codeVerifier: google.codeVerifier,
+      redirectUrl,
+    })
+  )
+
+  window.location.href = `${google.authUrl}${encodeURIComponent(redirectUrl)}`
+}
+
+export async function handleOAuth2Callback(): Promise<AuthState | null> {
+  if (typeof window === 'undefined') return null
+  const url = new URL(window.location.href)
+  const code = url.searchParams.get('code')
+  const state = url.searchParams.get('state')
+
+  if (!code || !state) return null
+
+  const storedRaw = sessionStorage.getItem(OAUTH_STORAGE_KEY)
+  if (!storedRaw) return null
+
+  try {
+    const stored = JSON.parse(storedRaw)
+    if (stored.state !== state) {
+      throw new Error('State OAuth2 tidak cocok.')
+    }
+
+    const res = await fetch(`${API.pocketbase}/api/collections/users/auth-with-oauth2`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        provider: stored.provider,
+        code,
+        codeVerifier: stored.codeVerifier,
+        redirectUrl: stored.redirectUrl,
+      }),
+    })
+
+    const data = await res.json()
+    sessionStorage.removeItem(OAUTH_STORAGE_KEY)
+
+    if (!res.ok) {
+      throw new Error(data.message || 'Gagal menyelesaikan login Google.')
+    }
+
+    const authState: AuthState = {
+      token: data.token,
+      record: {
+        id: data.record.id,
+        email: data.record.email,
+        name: data.record.name || data.record.email.split('@')[0],
+      },
+    }
+
+    setStoredAuth(authState.token, authState.record)
+    return authState
+  } catch (err) {
+    sessionStorage.removeItem(OAUTH_STORAGE_KEY)
+    throw err
+  }
+}
 export function getStoredAuth(): AuthState | null {
   if (typeof window === 'undefined') return null
   try {

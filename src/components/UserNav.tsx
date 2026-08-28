@@ -13,8 +13,8 @@ export default function UserNav() {
   if (!mounted) {
     return (
       <div className="flex items-center gap-2">
-        <a className="nav-link text-xs sm:text-sm" href="/masuk">
-          Masuk
+        <a className="nav-link text-xs sm:text-sm" href="/login">
+          Login
         </a>
         <a className="btn-primary ml-1 text-xs sm:text-sm" href="/unduh">
           Unduh
@@ -39,8 +39,8 @@ export default function UserNav() {
 
   return (
     <div className="flex items-center gap-1.5 sm:gap-2">
-      <a className="nav-link text-xs sm:text-sm" href="/masuk">
-        Masuk
+      <a className="nav-link text-xs sm:text-sm" href="/login">
+        Login
       </a>
       <a className="btn-primary ml-1 text-xs sm:text-sm" href="/unduh">
         Unduh

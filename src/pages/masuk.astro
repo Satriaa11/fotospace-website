@@ -1,13 +1,16 @@
 ---
-import Base from '../layouts/Base.astro'
-import LoginForm from '../components/auth/LoginForm'
 ---
-
-<Base
-  title="Masuk — Foto Space"
-  description="Masuk ke akun Foto Space Anda untuk mengelola lisensi, melihat masa aktif, dan mengunduh laporan."
->
-  <section class="container-site flex min-h-[calc(100dvh-180px)] items-center justify-center py-12">
-    <LoginForm client:load />
-  </section>
-</Base>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0;url=/login" />
+    <title>Mengalihkan ke Login...</title>
+    <script is:inline>
+      window.location.href = '/login'
+    </script>
+  </head>
+  <body>
+    <p>Mengalihkan ke <a href="/login">/login</a>...</p>
+  </body>
+</html>

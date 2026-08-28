@@ -39,7 +39,7 @@ export default function DashboardView() {
   const loadDashboard = async () => {
     const auth = getStoredAuth()
     if (!auth?.token) {
-      window.location.href = '/masuk'
+      window.location.href = '/login'
       return
     }
 
@@ -59,7 +59,7 @@ export default function DashboardView() {
 
   const handleLogout = () => {
     clearStoredAuth()
-    window.location.href = '/masuk'
+    window.location.href = '/login'
   }
 
   const handleCopyKey = (key: string) => {

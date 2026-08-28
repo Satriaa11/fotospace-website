@@ -71,8 +71,21 @@ interface OAuth2Provider {
 }
 
 export async function initiateGoogleLogin(): Promise<void> {
+  // Buka popup KOSONG dulu (sebelum async) — Safari memblokir window.open
+  // setelah await.
+  const popup = window.open('', 'fotospace-oauth2', 'width=520,height=640,popup=yes')
+  if (!popup) {
+    throw new Error(
+      'Popup login diblokir browser. Izinkan popup untuk fotospace.online lalu coba lagi.'
+    )
+  }
+
+  // redirect URI callback PocketBase (wajib terdaftar di Google Cloud Console)
+  const redirectURL = `${API.pocketbase}/api/oauth2-redirect`
+
   const res = await fetch(`${API.pocketbase}/api/collections/users/auth-methods`)
   if (!res.ok) {
+    popup.close()
     throw new Error('Gagal mengambil konfigurasi login Google.')
   }
 
@@ -82,67 +95,91 @@ export async function initiateGoogleLogin(): Promise<void> {
   const google = providers.find((p) => p.name === 'google')
 
   if (!google) {
+    popup.close()
     throw new Error(
       'Login Google belum diaktifkan di PocketBase Admin. Silakan aktifkan OAuth2 Google di https://license.pocketdb.fun/_/ atau login dengan Email.'
     )
   }
 
-  // PB 0.39: authUrl sengaja mengosongkan redirect_uri — client wajib
-  // menambahkan callback PB. Hasil auth dikirim balik lewat realtime
-  // subscription "@oauth2" dengan clientId = state (lihat
-  // apis/record_auth_with_oauth2_redirect.go).
-  const redirectUri = `${API.pocketbase}/api/oauth2-redirect`
-
-  await new Promise<AuthState>((resolve, reject) => {
-    const es = new EventSource(
-      `${API.pocketbase}/api/realtime?${new URLSearchParams({
-        clientId: google.state,
-        'subscriptions[@oauth2]': '@oauth2',
-      })}`
-    )
+  // Alur PB 0.39 (lihat RealtimeService SDK resmi):
+  //   1. EventSource /api/realtime → event PB_CONNECT membawa clientId (lastEventId)
+  //   2. POST /api/realtime { clientId, subscriptions: ["@oauth2"] }
+  //   3. Popup ke authUrl dengan state DIGANTI clientId + redirect_uri callback PB
+  //   4. PB /api/oauth2-redirect → kirim code via named event "@oauth2"
+  await new Promise<void>((resolve, reject) => {
+    let clientId = ''
+    let settled = false
+    const es = new EventSource(`${API.pocketbase}/api/realtime`)
 
     const timeout = setTimeout(() => {
+      if (settled) return
+      settled = true
       es.close()
+      popup.close()
       reject(new Error('Login Google melebihi batas waktu. Silakan coba lagi.'))
     }, 120_000)
 
-    es.onmessage = async (evt) => {
-      let msg: { name?: string; data?: { code?: string } }
+    const fail = (err: Error) => {
+      if (settled) return
+      settled = true
+      es.close()
+      popup.close()
+      reject(err)
+    }
+
+    es.addEventListener('PB_CONNECT', async (e) => {
+      clientId = (e as MessageEvent).lastEventId
+      if (!clientId) return
+
       try {
-        msg = JSON.parse(evt.data)
+        const sub = await fetch(`${API.pocketbase}/api/realtime`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ clientId, subscriptions: ['@oauth2'] }),
+        })
+        if (!sub.ok) {
+          throw new Error(`Gagal mendaftar realtime (HTTP ${sub.status}).`)
+        }
+
+        // authUrl PB sengaja berakhir dengan "&redirect_uri=" — append callback.
+        const url = google.authUrl + encodeURIComponent(redirectURL)
+        // state di authUrl WAJIB diganti clientId realtime (ClientById(state)).
+        const finalUrl = url.replace(/state=[^&]+/, `state=${encodeURIComponent(clientId)}`)
+        popup.location.href = finalUrl
+      } catch (err) {
+        fail(err instanceof Error ? err : new Error('Gagal menyambungkan realtime.'))
+      }
+    })
+
+    es.addEventListener('@oauth2', async (e) => {
+      if (settled) return
+      let msg: { code?: string; error?: string }
+      try {
+        msg = JSON.parse((e as MessageEvent).data)
       } catch {
         return
       }
-      if (msg.name !== '@oauth2' || !msg.data?.code) return
+
+      if (msg.error || !msg.code) {
+        fail(new Error(msg.error || 'Gagal mendapatkan kode OAuth2 dari Google.'))
+        return
+      }
 
       clearTimeout(timeout)
+      settled = true
       es.close()
+      popup.close()
 
       try {
-        const auth = await completeOAuth2(
-          google.name,
-          msg.data.code,
-          google.codeVerifier,
-          redirectUri
-        )
+        const auth = await completeOAuth2(google.name, msg.code, google.codeVerifier, redirectURL)
         resolve(auth)
       } catch (err) {
-        reject(err)
+        reject(err instanceof Error ? err : new Error('Gagal menyelesaikan login Google.'))
       }
-    }
+    })
 
-    const popup = window.open(
-      `${google.authUrl}${encodeURIComponent(redirectUri)}`,
-      'fotospace-oauth2',
-      'width=520,height=640,popup=yes'
-    )
-
-    if (!popup) {
-      clearTimeout(timeout)
-      es.close()
-      reject(
-        new Error('Popup login diblokir browser. Izinkan popup untuk fotospace.online lalu coba lagi.')
-      )
+    es.onerror = () => {
+      // EventSource auto-reconnect — timeout di atas sebagai pengaman akhir.
     }
   })
 }
@@ -156,7 +193,7 @@ async function completeOAuth2(
   const res = await fetch(`${API.pocketbase}/api/collections/users/auth-with-oauth2`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ provider, code, codeVerifier, redirectUrl }),
+    body: JSON.stringify({ provider, code, codeVerifier, redirectURL: redirectUrl }),
   })
 
   const data = await res.json()

@@ -5,26 +5,53 @@
 
 /*
  * The Safelight Darkroom — token sinkron DESIGN.md.
- * Semua neutral di-tint ke hue coral (25°); tidak ada #000/#fff.
+ * Light mode: kertas hangat, bukan putih menyilaukan.
  */
+:root,
+[data-theme='dark'] {
+  --fs-background: #0e0c0c;
+  --fs-sunken: #0a0909;
+  --fs-surface: #1d1a1a;
+  --fs-panel: #262120;
+  --fs-foreground: #f7f4f2;
+  --fs-muted: #8a8280;
+  --fs-border: #403a38;
+  --fs-border-strong: #57504d;
+  --fs-enlarger: 0 32px 96px rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --fs-background: #f3eee8;
+  --fs-sunken: #ebe4db;
+  --fs-surface: #faf6f1;
+  --fs-panel: #e8e0d6;
+  --fs-foreground: #2c2624;
+  --fs-muted: #6a625e;
+  --fs-border: #d6ccc3;
+  --fs-border-strong: #b9aea4;
+  --fs-enlarger: 0 24px 64px rgba(44, 38, 36, 0.12);
+  color-scheme: light;
+}
+
 @theme {
   --font-sans:
     'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
 
-  --color-background: #0e0c0c;
-  --color-sunken: #0a0909;
-  --color-surface: #1d1a1a;
-  --color-panel: #262120;
-  --color-foreground: #f7f4f2;
+  --color-background: var(--fs-background);
+  --color-sunken: var(--fs-sunken);
+  --color-surface: var(--fs-surface);
+  --color-panel: var(--fs-panel);
+  --color-foreground: var(--fs-foreground);
 
   --color-primary: #ff6363;
   --color-primary-hover: #ff7575;
   --color-primary-pressed: #d72a2a;
 
-  --color-muted-foreground: #8a8280;
-  --color-border: #403a38;
-  --color-border-strong: #57504d;
+  --color-muted-foreground: var(--fs-muted);
+  --color-border: var(--fs-border);
+  --color-border-strong: var(--fs-border-strong);
 
   --color-success: #30d158;
   --color-info: #0a84ff;
@@ -39,7 +66,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    background: var(--fs-background);
   }
 
   body {
@@ -53,7 +80,7 @@
   :focus-visible {
     outline: none;
     box-shadow:
-      0 0 0 2px var(--color-background),
+      0 0 0 2px var(--fs-background),
       0 0 0 4px var(--color-primary);
     border-radius: var(--radius-sm);
   }
@@ -81,6 +108,10 @@
     @apply rounded-[6px] px-2.5 py-1.5 text-muted-foreground transition-colors duration-150 hover:bg-panel hover:text-foreground;
   }
 
+  .nav-link-active {
+    @apply text-foreground;
+  }
+
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-[6px] bg-primary px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-primary-hover active:bg-primary-pressed;
   }
@@ -103,5 +134,13 @@
 
   .body-copy {
     @apply max-w-[68ch] text-base leading-[1.65] text-muted-foreground;
+  }
+
+  .safelight-glow {
+    opacity: 0.14;
+  }
+
+  [data-theme='light'] .safelight-glow {
+    opacity: 0.2;
   }
 }

@@ -1,7 +1,6 @@
 ---
 /**
- * Harga dari PRD lisensi (docs/prd/11-release-plan.md). Copy jujur: tier saat ini
- * berbeda di durasi & jumlah perangkat, bukan gating fitur, jadi tidak dikarang.
+ * Harga lisensi berbayar. Copy jujur: tier berbeda di durasi & jumlah perangkat.
  */
 import { Check } from 'lucide-react'
 import { PRICING_NOTE, STUDIO_NOTE, TIERS } from '../data/pricing'
@@ -11,13 +10,13 @@ import { PRICING_NOTE, STUDIO_NOTE, TIERS } from '../data/pricing'
   <div class="container-site py-20 lg:py-28">
     <div class="max-w-2xl">
       <p class="kicker">Harga</p>
-      <h2 class="section-headline mt-4 text-balance">Mulai gratis, lanjut kalau terbukti.</h2>
+      <h2 class="section-headline mt-4 text-balance">Bayar lisensi, pakai mesin yang sama.</h2>
       <p class="body-copy mt-5">
-        Trial 7 hari dengan semua fitur. Tidak ada kartu kredit, tidak ada kewajiban.
+        Tidak ada trial. Unduh aplikasinya, lalu aktivasi dari dashboard setelah pembayaran.
       </p>
     </div>
 
-    <div class="mt-12 grid gap-4 lg:grid-cols-3">
+    <div class="mt-12 grid max-w-3xl gap-4 lg:grid-cols-2">
       {
         TIERS.map((t) => (
           <div

@@ -23,10 +23,10 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: 'Bagaimana sistem lisensinya?',
-    a: 'Trial gratis 7 hari dengan semua fitur, tanpa kartu kredit. Setelah itu pilih Basic atau Pro. Satu lisensi berlaku untuk satu perangkat, dan bisa dipindahkan ke perangkat lain lewat menu lisensi di dalam app.',
+    a: 'Tidak ada trial. Unduh aplikasinya, buat akun di website, lalu bayar paket Basic atau Pro. Kunci lisensi diaktivasi dari dalam app. Satu lisensi terikat ke perangkat, dan bisa dipindahkan lewat menu lisensi.',
   },
   {
     q: 'Jalan di sistem operasi apa?',
-    a: 'Windows 10/11 (installer) dan Linux (AppImage). Dukungan macOS sedang disiapkan.',
+    a: 'Windows 10/11 (installer), macOS (Apple Silicon dan Intel), dan Linux (AppImage).',
   },
 ]

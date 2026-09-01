@@ -1,80 +1,53 @@
 ---
 import Base from '../layouts/Base.astro'
+import DownloadView from '../components/DownloadView'
 import { RELEASES } from '../config'
-import { fetchLatestRelease, formatBytes, formatDate } from '../lib/releases'
+import { fetchLatestRelease } from '../lib/releases'
 
 const release = await fetchLatestRelease()
+const version = release?.tag_name ?? 'versi terbaru'
 ---
 
 <Base
   title="Unduh Foto Space"
-  description={`Unduh Foto Space ${release?.tag_name ?? 'versi terbaru'} untuk Windows dan Linux. Trial gratis 7 hari dengan semua fitur.`}
+  description={`Unduh Foto Space ${version} untuk Windows, macOS, dan Linux. Lisensi dibeli dari dashboard setelah instalasi.`}
 >
   <section class="container-site py-16 sm:py-20">
     <p class="kicker">Unduh</p>
     <h1 class="mt-4 text-balance text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
-      {release ? `Foto Space ${release.tag_name}` : 'Unduh Foto Space'}
+      Unduh untuk Windows, macOS, dan Linux
     </h1>
     <p class="body-copy mt-4">
-      {release
-        ? `Rilis ${formatDate(release.published_at)}. Trial gratis 7 hari dengan semua fitur, tanpa kartu kredit.`
-        : 'Trial gratis 7 hari dengan semua fitur, tanpa kartu kredit.'}
+      Satu file installer per sistem. Pembaruan di GitHub otomatis tampil di halaman ini.
+      Setelah terpasang, aktivasi lisensi dari dalam aplikasi.
     </p>
 
-    {
-      release ? (
-        <div class="mt-10 max-w-3xl">
-          <ul class="divide-y divide-border border-y border-border">
-            {release.assets.map((a) => (
-              <li class="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
-                <div class="min-w-0">
-                  <p class="truncate font-mono text-sm">{a.name}</p>
-                  <p class="mt-1 font-mono text-xs text-muted-foreground">
-                    {formatBytes(a.size)} · {a.download_count} unduhan
-                  </p>
-                </div>
-                <a class="btn-primary shrink-0" href={a.browser_download_url}>
-                  Unduh
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div class="mt-10 max-w-xl rounded-[10px] border border-border bg-surface p-6">
-          <p class="text-sm leading-[1.65] text-muted-foreground">
-            Daftar unduhan sedang tidak bisa diambil. Ambil langsung dari halaman rilis GitHub:
-          </p>
-          <a
-            class="btn-primary mt-4"
-            href={`https://github.com/${RELEASES.repo}/releases/latest`}
-          >
-            Buka halaman rilis
-          </a>
-        </div>
-      )
-    }
+    <DownloadView client:load initialRelease={release} />
 
     <div class="mt-12 max-w-3xl border-t border-border pt-8">
       <h2 class="text-sm font-semibold">Catatan instalasi</h2>
       <ul class="mt-4 space-y-2.5 text-sm leading-[1.65] text-muted-foreground">
         <li>
-          <strong class="font-medium text-foreground">Windows 10/11:</strong> jalankan installer,
-          lalu izinkan jika SmartScreen bertanya. Foto Space belum punya sertifikat berbayar;
-          pilih “More info” → “Run anyway”.
+          <strong class="font-medium text-foreground">Windows 10/11:</strong> jalankan installer
+          .exe. Jika SmartScreen muncul, pilih “More info” lalu “Run anyway”. Foto Space belum
+          memakai sertifikat berbayar.
         </li>
         <li>
-          <strong class="font-medium text-foreground">Linux (AppImage):</strong> beri izin
-          eksekusi dulu: <code class="font-mono text-[13px]">chmod +x FotoSpace-*.AppImage</code>,
-          lalu jalankan.
+          <strong class="font-medium text-foreground">macOS:</strong> buka file .dmg, tarik Foto
+          Space ke folder Applications. Apple Silicon pakai build arm64; Mac Intel pakai build x64.
+        </li>
+        <li>
+          <strong class="font-medium text-foreground">Linux (AppImage):</strong> beri izin eksekusi
+          dulu: <code class="font-mono text-[13px]">chmod +x foto-space-*.AppImage</code>, lalu
+          jalankan.
         </li>
       </ul>
       <p class="mt-6 text-sm text-muted-foreground">
         Versi lama tersedia di{' '}
         <a
           class="underline decoration-border-strong underline-offset-4 transition-colors duration-150 hover:text-foreground"
-          href={`https://github.com/${RELEASES.repo}/releases`}>arsip rilis</a
-        >. Lisensi diaktivasi dari dalam app setelah instalasi.
+          href={`https://github.com/${RELEASES.repo}/releases`}>arsip rilis GitHub</a
+        >.
       </p>
     </div>
   </section>

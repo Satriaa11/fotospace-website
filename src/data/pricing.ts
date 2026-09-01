@@ -1,10 +1,8 @@
 /**
- * Harga sesuai docs/prd/11-release-plan.md di repo app.
- * Jujur: saat ini app belum membedakan fitur antar tier (selain durasi &
- * jumlah perangkat), maka copy tidak mengarang batas fitur.
+ * Harga lisensi berbayar. App tidak punya trial.
  */
 export interface Tier {
-  id: 'trial' | 'basic' | 'pro'
+  id: 'basic' | 'pro'
   name: string
   price: string
   period: string
@@ -17,43 +15,34 @@ export interface Tier {
 
 export const TIERS: Tier[] = [
   {
-    id: 'trial',
-    name: 'Trial',
-    price: 'Rp 0',
-    period: '7 hari pertama',
-    tagline: 'Coba mesin lengkapnya dulu, baru memutuskan.',
-    features: ['Semua fitur upload', '1 perangkat', 'Tanpa kartu kredit'],
-    cta: { label: 'Unduh Gratis', href: '/unduh' },
-  },
-  {
     id: 'basic',
     name: 'Basic',
     price: 'Rp 75.000',
     period: 'per minggu',
     alt: 'Rp 199.000 per bulan · Rp 1.999.000 per tahun',
-    tagline: 'Cocok untuk satu event atau uji coba minggu ini.',
+    tagline: 'Satu perangkat, mesin upload yang sama.',
     features: ['Semua fitur upload', '1 perangkat', 'Dukungan standar'],
-    cta: { label: 'Pilih Basic', href: '/unduh' },
+    cta: { label: 'Pilih Basic', href: '/dashboard' },
   },
   {
     id: 'pro',
     name: 'Pro',
     price: 'Rp 399.000',
     period: 'per bulan',
-    alt: 'Rp 3.999.000 per tahun, hemat Rp 789.000',
+    alt: 'Rp 3.999.000 per tahun',
     tagline: 'Untuk studio dengan lebih dari satu mesin kerja.',
     features: [
       'Semua fitur upload',
-      'Multi-perangkat (tambahan Rp 199.000 per perangkat)',
+      '2 perangkat',
       'Dukungan prioritas',
     ],
-    cta: { label: 'Pilih Pro', href: '/unduh' },
+    cta: { label: 'Pilih Pro', href: '/dashboard' },
     featured: true,
   },
 ]
 
 export const PRICING_NOTE =
-  'Semua tier memakai mesin upload yang sama persis. Yang berbeda hanya durasi lisensi dan jumlah perangkat. Basic tersedia mingguan (Rp 75.000), bulanan, atau tahunan.'
+  'Basic dan Pro memakai mesin upload yang sama. Yang berbeda hanya durasi lisensi dan jumlah perangkat. Basic tersedia mingguan (Rp 75.000), bulanan, atau tahunan.'
 
 export const STUDIO_NOTE =
   'Butuh banyak kursi untuk tim besar? Hubungi kami untuk penawaran Studio.'

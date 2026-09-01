@@ -5,7 +5,7 @@ export const SITE = {
   name: 'Foto Space',
   url: 'https://fotospace.online',
   description:
-    'Foto Space adalah aplikasi desktop untuk fotografer event: upload ribuan foto & video ke FotoYu secara otomatis — batch, kompresi cerdas, paralel, dan anti-gagal.',
+    'Foto Space adalah aplikasi desktop untuk fotografer event: upload batch foto & video ke FotoYu secara paralel, dengan Event Profile, dedup, dan antrean yang bisa dilanjutkan.',
   tagline: 'Upload ribuan foto event ke FotoYu, otomatis.',
 }
 

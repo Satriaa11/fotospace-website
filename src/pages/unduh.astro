@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro'
 import DownloadView from '../components/DownloadView'
-import { RELEASES } from '../config'
 import { fetchLatestRelease } from '../lib/releases'
 
 const release = await fetchLatestRelease()
@@ -18,8 +17,8 @@ const version = release?.tag_name ?? 'versi terbaru'
       Unduh untuk Windows, macOS, dan Linux
     </h1>
     <p class="body-copy mt-4">
-      Satu file installer per sistem. Pembaruan di GitHub otomatis tampil di halaman ini.
-      Setelah terpasang, aktivasi lisensi dari dalam aplikasi.
+      Satu file installer per sistem. Versi terbaru otomatis tampil di halaman ini. Setelah
+      terpasang, aktivasi lisensi dari dalam aplikasi.
     </p>
 
     <DownloadView client:load initialRelease={release} />
@@ -43,11 +42,7 @@ const version = release?.tag_name ?? 'versi terbaru'
         </li>
       </ul>
       <p class="mt-6 text-sm text-muted-foreground">
-        Versi lama tersedia di{' '}
-        <a
-          class="underline decoration-border-strong underline-offset-4 transition-colors duration-150 hover:text-foreground"
-          href={`https://github.com/${RELEASES.repo}/releases`}>arsip rilis GitHub</a
-        >.
+        Versi lama tersedia di halaman Changelog.
       </p>
     </div>
   </section>

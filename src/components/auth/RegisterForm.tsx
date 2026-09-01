@@ -218,7 +218,7 @@ export default function RegisterForm() {
         <div className="rounded-[6px] bg-background/50 p-3 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-3.5 w-3.5 text-success" />
-            <span>Mendapatkan trial gratis 7 hari semua fitur</span>
+            <span>Tidak ada trial — aktivasi lisensi setelah pembayaran</span>
           </div>
         </div>
 

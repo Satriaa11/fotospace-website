@@ -7,26 +7,26 @@ export interface FaqItem {
 export const FAQ: FaqItem[] = [
   {
     q: 'Apakah Foto Space aman untuk akun FotoYu saya?',
-    a: 'Foto Space login melalui API resmi FotoYu, jalur yang sama dengan login lewat browser. Kredensial disimpan di database lokal perangkat Anda dan hanya dipakai untuk berbicara dengan server FotoYu, tidak dikirim ke tempat lain.',
+    a: 'Foto Space login melalui API resmi FotoYu, jalur yang sama dengan login lewat browser. Token sesi disimpan terenkripsi di perangkat Anda (bukan di cloud kami) dan hanya dipakai untuk berkomunikasi dengan server FotoYu.',
   },
   {
     q: 'Apa bedanya dengan upload manual dari website FotoYu?',
-    a: 'Manual berarti memilih foto satu per satu, mengisi harga dan lokasi untuk tiap upload, dan menunggu di depan laptop. Foto Space bekerja sebaliknya: pilih folder sekali, seluruh isi diproses paralel, dan Anda bisa pergi mengerjakan hal lain.',
+    a: 'Manual berarti memilih foto satu per satu dan mengisi metadata berulang. Foto Space bekerja sebaliknya: pilih folder sekali, app memindai isinya, lalu mengunggah paralel sambil mengisi harga dan lokasi dari profil event atau Galeri & Harga.',
   },
   {
     q: 'Bagaimana kalau koneksi putus di tengah upload?',
-    a: 'Antrean upload disimpan di database lokal. Saat koneksi kembali, pekerjaan lanjut dari titik terakhir, bukan dari nol. File yang sudah berhasil sampai ke FotoYu dikenali lewat cek MD5 sehingga tidak diunggah dua kali.',
+    a: 'Antrean upload tersimpan di database lokal. Setelah koneksi kembali, buka menu Riwayat dan lanjutkan job yang terputus. File yang sudah sukses tidak diunggah ulang berkat cek MD5 per akun.',
   },
   {
     q: 'Laptop saya biasa saja, kuat menjalankan ini?',
-    a: 'Kuat. Foto Space dibuat untuk laptop kerja fotografer, bukan server. Kompresi berjalan efisien dengan jumlah worker yang menyesuaikan kondisi mesin dan koneksi.',
+    a: 'Ya. Foto Space dibuat untuk laptop kerja fotografer. Jumlah worker upload menyesuaikan kondisi mesin dan koneksi. Kompresi foto bersifat opsional di Pengaturan.',
   },
   {
     q: 'Bagaimana sistem lisensinya?',
-    a: 'Tidak ada trial. Unduh aplikasinya, buat akun di website, lalu bayar paket Basic atau Pro. Kunci lisensi diaktivasi dari dalam app. Satu lisensi terikat ke perangkat, dan bisa dipindahkan lewat menu lisensi.',
+    a: 'Tidak ada trial. Unduh aplikasi, buat akun di website, bayar paket Basic atau Pro, salin kunci lisensi dari dashboard, lalu tempel di layar aktivasi saat pertama buka app (atau lewat Pengaturan). Satu lisensi terikat per perangkat; bisa dicabut lewat Pengaturan untuk pindah ke mesin lain.',
   },
   {
     q: 'Jalan di sistem operasi apa?',
-    a: 'Windows 10/11 (installer), macOS (Apple Silicon dan Intel), dan Linux (AppImage).',
+    a: 'Windows 10/11 (installer), macOS Apple Silicon dan Intel (.dmg), serta Linux (AppImage).',
   },
 ]

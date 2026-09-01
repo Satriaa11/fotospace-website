@@ -1,8 +1,6 @@
 ---
 /**
- * Signature component (DESIGN.md §5): mock markup faithful jendela upload Foto Space.
- * Ini imagery produk di hero sampai screenshot nyata tersedia (M4: diganti loop Remotion).
- * Angka konsisten internal: total 1.284 file; progress 873 = 871 sukses + 2 duplikat.
+ * Mock ilustrasi jendela Foto Space (bukan screenshot produksi).
  */
 const thumbs = [
   'hsl(24 28% 34%)',
@@ -14,14 +12,23 @@ const thumbs = [
   'hsl(18 20% 25%)',
   'hsl(26 28% 32%)',
 ]
+
+const sidebarItems = [
+  { label: 'Dashboard', active: false },
+  { label: 'Upload', active: true },
+  { label: 'Riwayat', active: false },
+  { label: 'Galeri & Harga', active: false },
+  { label: 'Event', active: false },
+  { label: 'Akun', active: false },
+  { label: 'Pengaturan', active: false },
+]
 ---
 
 <div
   role="img"
-  aria-label="Jendela aplikasi Foto Space sedang mengunggah 1.284 file ke FotoYu: 873 selesai, 871 sukses, 0 gagal."
+  aria-label="Ilustrasi aplikasi Foto Space sedang mengunggah 1.284 file ke FotoYu."
   class="overflow-hidden rounded-[10px] border border-border bg-surface shadow-[var(--fs-enlarger)]"
 >
-  <!-- Title bar -->
   <div class="flex items-center gap-3 border-b border-border bg-background px-4 py-2.5">
     <div class="flex gap-1.5">
       <span class="h-2.5 w-2.5 rounded-full bg-panel"></span>
@@ -29,29 +36,33 @@ const thumbs = [
       <span class="h-2.5 w-2.5 rounded-full bg-panel"></span>
     </div>
     <p class="flex-1 text-center font-mono text-xs text-muted-foreground">Foto Space</p>
-    <span class="font-mono text-[11px] text-muted-foreground">v1.1.7</span>
+    <span class="font-mono text-[11px] text-muted-foreground">v1.1.9</span>
   </div>
 
   <div class="md:grid md:grid-cols-[168px_minmax(0,1fr)]">
-    <!-- Sidebar -->
     <nav
       class="hidden border-r border-border bg-background/40 p-3 md:block"
       aria-hidden="true"
     >
       <ul class="space-y-0.5 text-[13px]">
-        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Dashboard</li>
-        <li
-          class="flex items-center gap-2 rounded-[6px] bg-panel px-2.5 py-1.5 font-medium text-foreground"
-        >
-          <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>Upload
-        </li>
-        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Riwayat</li>
-        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Akun</li>
-        <li class="rounded-[6px] px-2.5 py-1.5 text-muted-foreground">Pengaturan</li>
+        {
+          sidebarItems.map((item) => (
+            <li
+              class:list={[
+                'rounded-[6px] px-2.5 py-1.5',
+                item.active
+                  ? 'flex items-center gap-2 bg-panel font-medium text-foreground'
+                  : 'text-muted-foreground',
+              ]}
+            >
+              {item.active && <span class="h-1.5 w-1.5 rounded-full bg-primary" />}
+              {item.label}
+            </li>
+          ))
+        }
       </ul>
     </nav>
 
-    <!-- Main -->
     <div class="space-y-4 p-4 sm:p-5">
       <div class="flex items-center justify-between gap-3">
         <p class="text-sm font-semibold">Upload</p>
@@ -61,7 +72,7 @@ const thumbs = [
       <div
         class="flex items-center justify-between gap-3 rounded-[6px] border border-border bg-background px-3 py-2 font-mono text-xs text-muted-foreground"
       >
-        <span class="truncate">/SD-CARD/WEDDING-DINA-2026</span>
+        <span class="truncate">/media/satria/WEDDING-DINA-2026</span>
         <span class="shrink-0">1.284 foto · 3 video</span>
       </div>
 

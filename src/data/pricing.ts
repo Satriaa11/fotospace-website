@@ -21,7 +21,7 @@ export const TIERS: Tier[] = [
     period: 'per minggu',
     alt: 'Rp 199.000 per bulan · Rp 1.999.000 per tahun',
     tagline: 'Satu perangkat, mesin upload yang sama.',
-    features: ['Semua fitur upload', '1 perangkat', 'Dukungan standar'],
+    features: ['Semua fitur upload', '1 perangkat'],
     cta: { label: 'Pilih Basic', href: '/dashboard' },
   },
   {
@@ -31,11 +31,7 @@ export const TIERS: Tier[] = [
     period: 'per bulan',
     alt: 'Rp 3.999.000 per tahun',
     tagline: 'Untuk studio dengan lebih dari satu mesin kerja.',
-    features: [
-      'Semua fitur upload',
-      '2 perangkat',
-      'Dukungan prioritas',
-    ],
+    features: ['Semua fitur upload', '2 perangkat'],
     cta: { label: 'Pilih Pro', href: '/dashboard' },
     featured: true,
   },
@@ -45,4 +41,4 @@ export const PRICING_NOTE =
   'Basic dan Pro memakai mesin upload yang sama. Yang berbeda hanya durasi lisensi dan jumlah perangkat. Basic tersedia mingguan (Rp 75.000), bulanan, atau tahunan.'
 
 export const STUDIO_NOTE =
-  'Butuh banyak kursi untuk tim besar? Hubungi kami untuk penawaran Studio.'
+  'Butuh banyak kursi untuk tim besar? Paket Studio tersedia — hubungi kami lewat menu Kritik & Saran di aplikasi.'

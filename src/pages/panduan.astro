@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro'
 
 <Base
   title="Panduan Foto Space"
-  description="Panduan cepat memulai Foto Space: login FotoYu, pilih folder, dan upload paralel pertama Anda."
+  description="Panduan cepat memulai Foto Space: login FotoYu, aktivasi lisensi, dan upload batch pertama."
 >
   <section class="container-site max-w-3xl py-16 sm:py-20">
     <p class="kicker">Panduan</p>
@@ -12,8 +12,8 @@ import Base from '../layouts/Base.astro'
       Mulai dalam lima menit
     </h1>
     <p class="body-copy mt-4">
-      Tiga hal yang perlu dilakukan sebelum upload pertama. Panduan lengkap per fitur menyusul di
-      halaman ini.
+      Empat langkah sebelum upload pertama. Detail tiap fitur ada di menu Panduan di dalam
+      aplikasi.
     </p>
 
     <ol class="mt-12 space-y-10">
@@ -21,35 +21,41 @@ import Base from '../layouts/Base.astro'
         <p class="font-mono text-[13px] text-muted-foreground">Langkah 1</p>
         <h2 class="mt-2 text-[17px] font-semibold tracking-[-0.01em]">Login ke FotoYu</h2>
         <p class="mt-1.5 text-[15px] leading-[1.65] text-muted-foreground">
-          Buka menu Akun, masukkan kredensial FotoYu toko Anda. Kredensial disimpan hanya di
-          perangkat ini.
+          Buka menu <strong>Akun</strong>, masukkan kredensial toko FotoYu Anda. Token sesi
+          disimpan terenkripsi hanya di perangkat ini.
         </p>
       </li>
       <li class="border-t border-border pt-6">
         <p class="font-mono text-[13px] text-muted-foreground">Langkah 2</p>
         <h2 class="mt-2 text-[17px] font-semibold tracking-[-0.01em]">Aktivasi lisensi</h2>
         <p class="mt-1.5 text-[15px] leading-[1.65] text-muted-foreground">
-          Buat akun di website, bayar paket Basic atau Pro, lalu masukkan kunci lisensi di menu
-          Lisensi di dalam app. Tidak ada masa trial.
+          Buat akun di website ini, bayar paket Basic atau Pro, salin kunci lisensi dari
+          dashboard, lalu tempel di layar aktivasi saat pertama buka aplikasi (atau lewat
+          <strong>Pengaturan</strong>). Tidak ada masa trial.
         </p>
       </li>
       <li class="border-t border-border pt-6">
         <p class="font-mono text-[13px] text-muted-foreground">Langkah 3</p>
+        <h2 class="mt-2 text-[17px] font-semibold tracking-[-0.01em]">Atur galeri & event</h2>
+        <p class="mt-1.5 text-[15px] leading-[1.65] text-muted-foreground">
+          Isi harga dan lokasi default di menu <strong>Galeri &amp; Harga</strong>, atau buat
+          <strong>Event Profile</strong> untuk tiap job agar metadata terisi otomatis saat upload.
+        </p>
+      </li>
+      <li class="border-t border-border pt-6">
+        <p class="font-mono text-[13px] text-muted-foreground">Langkah 4</p>
         <h2 class="mt-2 text-[17px] font-semibold tracking-[-0.01em]">Upload pertama</h2>
         <p class="mt-1.5 text-[15px] leading-[1.65] text-muted-foreground">
-          Pilih folder hasil event, pilih event di FotoYu, klik Upload. Untuk percobaan pertama,
-          gunakan folder kecil dulu supaya Anda melihat alurnya dari awal sampai laporan.
+          Pilih folder hasil event (bisa dari drive external), review daftar file, lalu mulai
+          upload. Untuk percobaan, gunakan folder kecil dulu supaya familiar dengan alurnya.
         </p>
       </li>
     </ol>
 
     <div class="mt-14 rounded-[10px] border border-border bg-sunken p-6">
       <p class="text-sm leading-[1.65] text-muted-foreground">
-        Ada kendala saat mencoba? Kirim ke{' '}
-        <a
-          class="underline decoration-border-strong underline-offset-4 transition-colors duration-150 hover:text-foreground"
-          href="mailto:satria.fotospace@gmail.com">satria.fotospace@gmail.com</a
-        >, atau dari dalam app lewat menu Kirim Feedback (menyertakan diagnosis otomatis).
+        Ada kendala? Gunakan menu <strong>Kritik &amp; Saran</strong> di aplikasi — pesan Anda
+        otomatis menyertakan info diagnosis yang membantu tim menelusuri masalah.
       </p>
     </div>
   </section>

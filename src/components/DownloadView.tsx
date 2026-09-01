@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Apple, AppWindow, Download, Loader2, Monitor } from 'lucide-react'
-import { RELEASES } from '../config'
 import {
   fetchLatestReleaseLive,
   formatBytes,
@@ -92,7 +91,7 @@ export default function DownloadView({ initialRelease }: Props) {
     return (
       <div className="mt-10 flex items-center gap-2 text-sm text-muted-foreground">
         <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-        Mengambil rilis terbaru dari GitHub…
+        Mengambil rilis terbaru…
       </div>
     )
   }
@@ -101,11 +100,8 @@ export default function DownloadView({ initialRelease }: Props) {
     return (
       <div className="mt-10 max-w-xl rounded-[10px] border border-border bg-surface p-6">
         <p className="text-sm leading-[1.65] text-muted-foreground">
-          Daftar unduhan sedang tidak bisa diambil. Ambil langsung dari halaman rilis GitHub.
+          Daftar unduhan sedang tidak bisa diambil. Coba muat ulang halaman ini beberapa saat lagi.
         </p>
-        <a className="btn-primary mt-4" href={`https://github.com/${RELEASES.repo}/releases/latest`}>
-          Buka halaman rilis
-        </a>
       </div>
     )
   }
@@ -115,7 +111,7 @@ export default function DownloadView({ initialRelease }: Props) {
       <p className="text-sm text-muted-foreground">
         Versi <span className="font-mono text-foreground">{release.tag_name}</span>
         {' · '}
-        rilis {formatDate(release.published_at)}. File diambil otomatis dari GitHub Releases.
+        rilis {formatDate(release.published_at)}.
       </p>
 
       <div className="mt-8 grid gap-4 lg:grid-cols-3">

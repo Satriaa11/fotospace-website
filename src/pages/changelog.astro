@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro'
-import { RELEASES } from '../config'
 import { fetchReleases, formatDate, formatReleaseBody } from '../lib/releases'
 
 const releases = await fetchReleases(12)
@@ -16,7 +15,7 @@ const releases = await fetchReleases(12)
       Catatan rilis
     </h1>
     <p class="body-copy mt-4">
-      Setiap versi Foto Space dicatat di sini, sama persis dengan catatan di repo rilis.
+      Setiap versi Foto Space dicatat di sini begitu rilis baru tersedia.
     </p>
 
     {
@@ -42,13 +41,7 @@ const releases = await fetchReleases(12)
         </ol>
       ) : (
         <p class="mt-12 text-sm text-muted-foreground">
-          Catatan rilis sedang tidak bisa diambil. Lihat langsung di{' '}
-          <a
-            class="underline decoration-border-strong underline-offset-4 transition-colors duration-150 hover:text-foreground"
-            href={`https://github.com/${RELEASES.repo}/releases`}
-          >
-            GitHub
-          </a>.
+          Catatan rilis sedang tidak bisa diambil. Silakan coba lagi nanti.
         </p>
       )
     }

@@ -286,7 +286,8 @@ export default function DashboardView() {
                   </button>
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  Buka aplikasi <strong>Foto Space</strong> di laptop Anda → menu <strong>Lisensi</strong> → masukkan key di atas untuk aktivasi.
+                  Buka aplikasi <strong>Foto Space</strong> → layar aktivasi lisensi saat pertama
+                  buka, atau menu <strong>Pengaturan</strong> → tempel key di atas.
                 </p>
               </div>
             )}
@@ -372,11 +373,11 @@ export default function DashboardView() {
                   </li>
                   <li className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-                    <span>Kompresi cerdas adaptif</span>
+                    <span>Kompresi foto opsional</span>
                   </li>
                   <li className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-                    <span>Laporan CSV & PDF</span>
+                    <span>Laporan CSV per job</span>
                   </li>
                 </ul>
               </div>
@@ -471,7 +472,7 @@ export default function DashboardView() {
               </li>
               <li className="flex gap-2">
                 <span className="font-mono font-bold text-foreground">2.</span>
-                <span>Buka app, masuk ke menu <strong>Lisensi</strong> di sidebar.</span>
+                <span>Buka app — layar aktivasi lisensi muncul otomatis jika belum aktif.</span>
               </li>
               <li className="flex gap-2">
                 <span className="font-mono font-bold text-foreground">3.</span>
@@ -483,14 +484,8 @@ export default function DashboardView() {
           <div className="rounded-[10px] border border-border bg-surface p-6">
             <h3 className="text-sm font-semibold text-foreground">Butuh Bantuan?</h3>
             <p className="mt-2 text-xs leading-[1.6] text-muted-foreground">
-              Jika mengalami kendala lisensi atau pembayaran, hubungi tim kami di{' '}
-              <a
-                href="mailto:satria.fotospace@gmail.com"
-                className="text-foreground underline decoration-border-strong hover:text-primary"
-              >
-                satria.fotospace@gmail.com
-              </a>
-              .
+              Kendala lisensi atau pembayaran bisa dilaporkan lewat menu{' '}
+              <strong>Kritik &amp; Saran</strong> di aplikasi Foto Space.
             </p>
           </div>
         </div>

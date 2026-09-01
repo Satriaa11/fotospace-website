@@ -356,7 +356,10 @@ export async function createPaymentOrder(
 
   const data = await res.json()
   if (!res.ok) {
-    throw new Error(data.error || data.detail || 'Gagal membuat pesanan pembayaran.')
+    if (res.status === 429) {
+      throw new Error('Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.')
+    }
+    throw new Error('Gagal membuat pesanan pembayaran. Coba lagi beberapa saat.')
   }
   return data.order
 }

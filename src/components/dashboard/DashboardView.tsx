@@ -623,7 +623,7 @@ export default function DashboardView() {
                 {orders.map((o) => (
                   <tr key={o.order_id} className="hover:bg-panel/40 transition-colors">
                     <td className="py-3 px-4 text-muted-foreground whitespace-nowrap">
-                      {formatOrderDate(o.completed_at || o.created)}
+                      {formatOrderDate(o.completed_at || o.created || o.expired_at)}
                     </td>
                     <td className="py-3 px-4 font-mono font-medium text-foreground whitespace-nowrap">
                       {o.order_id}

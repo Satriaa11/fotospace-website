@@ -92,6 +92,12 @@ export default function DashboardView() {
 
     try {
       const order = await createPaymentOrder(data.user.email, selectedPkg, selectedPeriod, 'qris')
+      if (/THIS\.IS\.JUST\.AN\.EXAMPLE|SANDBOX/i.test(order.payment_number || '')) {
+        setOrderMessage(
+          'Proyek Pakasir masih mode Sandbox. Matikan Sandbox di dashboard Pakasir (proyek fotospace), lalu coba bayar lagi.'
+        )
+        return
+      }
       setActiveOrder(order)
     } catch (err: unknown) {
       setOrderMessage(err instanceof Error ? err.message : 'Gagal membuat transaksi.')

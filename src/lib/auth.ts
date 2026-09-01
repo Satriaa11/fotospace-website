@@ -359,6 +359,11 @@ export async function createPaymentOrder(
     if (res.status === 429) {
       throw new Error('Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.')
     }
+    if (data.error === 'payment_sandbox') {
+      throw new Error(
+        'Proyek Pakasir masih mode Sandbox. Matikan Sandbox di dashboard Pakasir (proyek fotospace), lalu coba bayar lagi.'
+      )
+    }
     throw new Error('Gagal membuat pesanan pembayaran. Coba lagi beberapa saat.')
   }
   return data.order

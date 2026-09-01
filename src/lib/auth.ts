@@ -25,15 +25,15 @@ export interface UserLicense {
 
 export interface UserOrder {
   order_id: string
+  created?: string | null
   pkg: 'basic' | 'pro'
-  period: 'monthly' | 'yearly'
+  period: 'weekly' | 'monthly' | 'yearly'
   amount: number
   fee: number
   total_payment: number
   payment_method: string
   payment_number: string
   status: 'pending' | 'completed' | 'cancelled' | 'expired'
-  created?: string
   expired_at: string
   completed_at?: string | null
   license_key?: string | null
@@ -48,7 +48,7 @@ export interface DashboardData {
 export interface PaymentOrderResponse {
   order_id: string
   pkg: 'basic' | 'pro'
-  period: 'monthly' | 'yearly'
+  period: 'weekly' | 'monthly' | 'yearly'
   amount: number
   fee: number
   total_payment: number
@@ -311,7 +311,6 @@ export async function registerWithPassword(
     throw new Error(message)
   }
 
-  // Auto login setelah registrasi berhasil
   return await loginWithPassword(email, password)
 }
 
@@ -341,7 +340,7 @@ export async function fetchUserDashboard(token: string): Promise<DashboardData> 
 export async function createPaymentOrder(
   email: string,
   pkg: 'basic' | 'pro',
-  period: 'monthly' | 'yearly',
+  period: 'weekly' | 'monthly' | 'yearly',
   method: string = 'qris'
 ): Promise<PaymentOrderResponse> {
   const res = await fetch(`${API.worker}/payment/create`, {

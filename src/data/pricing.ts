@@ -28,10 +28,10 @@ export const TIERS: Tier[] = [
   {
     id: 'basic',
     name: 'Basic',
-    price: 'Rp 199.000',
-    period: 'per bulan',
-    alt: 'Rp 1.999.000 per tahun, hemat Rp 389.000',
-    tagline: 'Untuk fotografer solo yang upload tiap minggu.',
+    price: 'Rp 75.000',
+    period: 'per minggu',
+    alt: 'Rp 199.000 per bulan · Rp 1.999.000 per tahun',
+    tagline: 'Cocok untuk satu event atau uji coba minggu ini.',
     features: ['Semua fitur upload', '1 perangkat', 'Dukungan standar'],
     cta: { label: 'Pilih Basic', href: '/unduh' },
   },
@@ -53,7 +53,7 @@ export const TIERS: Tier[] = [
 ]
 
 export const PRICING_NOTE =
-  'Semua tier memakai mesin upload yang sama persis. Yang berbeda hanya durasi lisensi dan jumlah perangkat.'
+  'Semua tier memakai mesin upload yang sama persis. Yang berbeda hanya durasi lisensi dan jumlah perangkat. Basic tersedia mingguan (Rp 75.000), bulanan, atau tahunan.'
 
 export const STUDIO_NOTE =
   'Butuh banyak kursi untuk tim besar? Hubungi kami untuk penawaran Studio.'

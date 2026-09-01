@@ -9,6 +9,16 @@ import {
   type PaymentOrderResponse,
 } from '../../lib/auth'
 import {
+  formatOrderDate,
+  formatOrderStatus,
+  formatPlanLabel,
+  formatPlanPeriod,
+  formatRupiah,
+  getPlanPrice,
+  type PlanPeriod,
+  type PlanPkg,
+} from '../../data/plans'
+import {
   ShieldCheck,
   Check,
   Copy,
@@ -29,12 +39,13 @@ export default function DashboardView() {
   const [copied, setCopied] = useState(false)
 
   // Payment state
-  const [selectedPkg, setSelectedPkg] = useState<'basic' | 'pro'>('basic')
-  const [selectedPeriod, setSelectedPeriod] = useState<'monthly' | 'yearly'>('monthly')
+  const [selectedPkg, setSelectedPkg] = useState<PlanPkg>('basic')
+  const [selectedPeriod, setSelectedPeriod] = useState<PlanPeriod>('monthly')
   const [paying, setPaying] = useState(false)
   const [activeOrder, setActiveOrder] = useState<PaymentOrderResponse | null>(null)
   const [orderChecking, setOrderChecking] = useState(false)
   const [orderMessage, setOrderMessage] = useState<string | null>(null)
+  const [refreshing, setRefreshing] = useState(false)
 
   const loadDashboard = async () => {
     const auth = getStoredAuth()
@@ -56,6 +67,12 @@ export default function DashboardView() {
   useEffect(() => {
     loadDashboard()
   }, [])
+
+  useEffect(() => {
+    if (selectedPeriod === 'weekly' && selectedPkg === 'pro') {
+      setSelectedPkg('basic')
+    }
+  }, [selectedPeriod, selectedPkg])
 
   const handleLogout = () => {
     clearStoredAuth()
@@ -104,6 +121,14 @@ export default function DashboardView() {
     }
   }
 
+  const handleRefreshDashboard = async () => {
+    setRefreshing(true)
+    setError(null)
+    await loadDashboard()
+    setRefreshing(false)
+  }
+
+
   if (loading) {
     return (
       <div className="container-site flex min-h-[60vh] flex-col items-center justify-center py-20">
@@ -131,6 +156,10 @@ export default function DashboardView() {
   const user = data?.user
   const license = data?.license
   const orders = data?.orders || []
+  const selectedPrice = getPlanPrice(selectedPkg, selectedPeriod)
+  const basicPrice = getPlanPrice('basic', selectedPeriod)
+  const proPrice = getPlanPrice('pro', selectedPeriod)
+  const proAvailable = selectedPeriod !== 'weekly'
 
   return (
     <div className="container-site py-10 sm:py-16">
@@ -269,8 +298,19 @@ export default function DashboardView() {
               Pembayaran instan via QRIS (BCA, GoPay, OVO, Dana, ShopeePay, LinkAja, Mandiri, dll).
             </p>
 
-            {/* Toggle Bulanan / Tahunan */}
-            <div className="mt-6 flex items-center gap-2 rounded-[8px] bg-background/80 p-1 border border-border w-fit">
+            {/* Toggle Mingguan / Bulanan / Tahunan */}
+            <div className="mt-6 flex flex-wrap items-center gap-2 rounded-[8px] bg-background/80 p-1 border border-border w-fit">
+              <button
+                type="button"
+                onClick={() => setSelectedPeriod('weekly')}
+                className={`rounded-[6px] px-4 py-1.5 text-xs font-medium transition-colors ${
+                  selectedPeriod === 'weekly'
+                    ? 'bg-panel text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                Mingguan
+              </button>
               <button
                 type="button"
                 onClick={() => setSelectedPeriod('monthly')}
@@ -314,9 +354,9 @@ export default function DashboardView() {
                   <span className="text-xs text-muted-foreground font-mono">1 Perangkat</span>
                 </div>
                 <p className="mt-3 font-mono text-xl font-bold text-foreground">
-                  {selectedPeriod === 'monthly' ? 'Rp 199.000' : 'Rp 1.999.000'}
+                  {formatRupiah(basicPrice)}
                   <span className="text-xs font-normal text-muted-foreground">
-                    /{selectedPeriod === 'monthly' ? 'bulan' : 'tahun'}
+                    /{formatPlanPeriod(selectedPeriod)}
                   </span>
                 </p>
                 <ul className="mt-4 space-y-1.5 text-xs text-muted-foreground">
@@ -337,8 +377,10 @@ export default function DashboardView() {
 
               {/* Pro */}
               <div
-                onClick={() => setSelectedPkg('pro')}
-                className={`cursor-pointer rounded-[8px] border p-5 transition-all ${
+                onClick={() => proAvailable && setSelectedPkg('pro')}
+                className={`rounded-[8px] border p-5 transition-all ${
+                  !proAvailable ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+                } ${
                   selectedPkg === 'pro'
                     ? 'border-primary bg-primary/5 ring-1 ring-primary'
                     : 'border-border bg-background hover:border-border-strong'
@@ -349,9 +391,9 @@ export default function DashboardView() {
                   <span className="text-xs text-primary font-mono font-medium">Studio Multi-Alat</span>
                 </div>
                 <p className="mt-3 font-mono text-xl font-bold text-foreground">
-                  {selectedPeriod === 'monthly' ? 'Rp 399.000' : 'Rp 3.999.000'}
+                  {proAvailable ? formatRupiah(proPrice) : '—'}
                   <span className="text-xs font-normal text-muted-foreground">
-                    /{selectedPeriod === 'monthly' ? 'bulan' : 'tahun'}
+                    /{formatPlanPeriod(selectedPeriod)}
                   </span>
                 </p>
                 <ul className="mt-4 space-y-1.5 text-xs text-muted-foreground">
@@ -376,18 +418,12 @@ export default function DashboardView() {
               <div>
                 <p className="text-xs text-muted-foreground">Total yang akan dibayar:</p>
                 <p className="font-mono text-lg font-bold text-foreground">
-                  {selectedPkg === 'basic'
-                    ? selectedPeriod === 'monthly'
-                      ? 'Rp 199.000'
-                      : 'Rp 1.999.000'
-                    : selectedPeriod === 'monthly'
-                      ? 'Rp 399.000'
-                      : 'Rp 3.999.000'}
+                  {formatRupiah(selectedPrice)}
                 </p>
               </div>
               <button
                 onClick={handleCreateOrder}
-                disabled={paying}
+                disabled={paying || selectedPrice <= 0}
                 className="btn-primary shrink-0 gap-2"
               >
                 {paying ? (
@@ -551,16 +587,30 @@ export default function DashboardView() {
 
       {/* Riwayat Transaksi */}
       <div className="mt-14 border-t border-border pt-10">
-        <h2 className="text-lg font-semibold text-foreground">Riwayat Pembayaran</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Daftar pesanan dan perpanjangan lisensi akun Anda.
-        </p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-foreground">Riwayat Pembayaran</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Daftar pesanan dan perpanjangan lisensi akun Anda.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handleRefreshDashboard}
+            disabled={refreshing}
+            className="btn-secondary self-start gap-2 text-xs"
+          >
+            <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+            <span>{refreshing ? 'Memuat...' : 'Perbarui'}</span>
+          </button>
+        </div>
 
         {orders.length > 0 ? (
           <div className="mt-6 overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead className="border-b border-border bg-background/50 text-muted-foreground">
                 <tr>
+                  <th className="py-3 px-4">Tanggal</th>
                   <th className="py-3 px-4 font-mono">Invoice ID</th>
                   <th className="py-3 px-4">Paket</th>
                   <th className="py-3 px-4 font-mono">Total</th>
@@ -572,14 +622,17 @@ export default function DashboardView() {
               <tbody className="divide-y divide-border border-b border-border">
                 {orders.map((o) => (
                   <tr key={o.order_id} className="hover:bg-panel/40 transition-colors">
-                    <td className="py-3 px-4 font-mono font-medium text-foreground">
+                    <td className="py-3 px-4 text-muted-foreground whitespace-nowrap">
+                      {formatOrderDate(o.completed_at || o.created)}
+                    </td>
+                    <td className="py-3 px-4 font-mono font-medium text-foreground whitespace-nowrap">
                       {o.order_id}
                     </td>
-                    <td className="py-3 px-4 capitalize">
-                      {o.pkg} ({o.period})
+                    <td className="py-3 px-4 whitespace-nowrap">
+                      {formatPlanLabel(o.pkg, o.period)}
                     </td>
-                    <td className="py-3 px-4 font-mono">
-                      Rp {o.total_payment?.toLocaleString('id-ID') || o.amount?.toLocaleString('id-ID')}
+                    <td className="py-3 px-4 font-mono whitespace-nowrap">
+                      {formatRupiah(o.total_payment || o.amount)}
                     </td>
                     <td className="py-3 px-4 uppercase text-muted-foreground font-mono">
                       {o.payment_method}
@@ -594,11 +647,7 @@ export default function DashboardView() {
                               : 'bg-panel text-muted-foreground'
                         }`}
                       >
-                        {o.status === 'completed'
-                          ? 'Lunas'
-                          : o.status === 'pending'
-                            ? 'Menunggu'
-                            : o.status}
+                        {formatOrderStatus(o.status)}
                       </span>
                     </td>
                     <td className="py-3 px-4 font-mono text-muted-foreground">
@@ -610,8 +659,11 @@ export default function DashboardView() {
             </table>
           </div>
         ) : (
-          <div className="mt-6 rounded-[8px] border border-border bg-surface p-6 text-center text-sm text-muted-foreground">
-            Belum ada riwayat transaksi.
+          <div className="mt-6 rounded-[8px] border border-dashed border-border bg-surface p-8 text-center">
+            <p className="text-sm font-medium text-foreground">Belum ada riwayat transaksi</p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Setelah Anda membayar paket lisensi, invoice dan status pembayaran akan muncul di sini.
+            </p>
           </div>
         )}
       </div>
